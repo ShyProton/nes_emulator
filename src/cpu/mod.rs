@@ -1,6 +1,6 @@
 mod registers;
 
-use registers::Registers;
+use registers::{Register, Registers};
 
 pub struct Cpu {
     registers: Registers,
@@ -32,7 +32,7 @@ impl Cpu {
 
                     self.registers
                         .status
-                        .set('N', self.registers.accumulator & 0b1000_0000 != 0);
+                        .set('N', self.registers.accumulator.get_nth_bit(7));
                 }
 
                 _ => todo!(),

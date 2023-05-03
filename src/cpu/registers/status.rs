@@ -26,7 +26,7 @@ impl Status {
 
     pub fn get(&self, flag: char) -> bool {
         let position = Self::flag_pos(flag);
-        self.status.bit_is_set(position)
+        self.status.get_nth_bit(position)
     }
 
     pub fn reset_flags(&mut self) {
@@ -39,5 +39,34 @@ impl Status {
             .rev()
             .position(|&val| val == flag)
             .map_or_else(|| panic!("Invalid status flag"), |pos| pos)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn flag_settings() {
+        let mut status = Status::new();
+
+        for flag in Status::FLAGS {
+            status.reset_flags();
+
+            status.set(flag, true);
+            assert!(status.get(flag));
+
+            status.set(flag, false);
+            assert!(!status.get(flag));
+        }
+    }
+
+    #[test]
+    #[should_panic(expected = "Invalid status flag")]
+    fn nonexistent_flag_setting() {
+        let mut status = Status::new();
+
+        // The 'A' status flag does not exist.
+        status.set('A', true);
     }
 }

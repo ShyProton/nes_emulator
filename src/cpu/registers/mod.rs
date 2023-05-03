@@ -2,13 +2,13 @@ use status::Status;
 
 mod status;
 
-trait Register {
-    fn bit_is_set(&self, position: usize) -> bool;
+pub trait Register {
+    fn get_nth_bit(&self, position: usize) -> bool;
 }
 
 impl Register for u8 {
-    fn bit_is_set(&self, position: usize) -> bool {
-        assert!(position <= 7, "Bit position is out of bounds.");
+    fn get_nth_bit(&self, position: usize) -> bool {
+        assert!(position <= 7, "Bit position is out of bounds");
         self & (0b0000_0001 << position) != 0
     }
 }
@@ -55,18 +55,18 @@ mod tests {
         for pos in 0..7 {
             // Tests to ensure the bit is set.
             registers.accumulator |= 0b0000_0001 << pos;
-            assert!(registers.accumulator.bit_is_set(pos));
+            assert!(registers.accumulator.get_nth_bit(pos));
 
             // Tests to ensure the bit is unset.
             registers.accumulator &= !(0b0000_0001 << pos);
-            assert!(!registers.accumulator.bit_is_set(pos));
+            assert!(!registers.accumulator.get_nth_bit(pos));
         }
     }
 
     #[test]
-    #[should_panic]
+    #[should_panic(expected = "Bit position is out of bounds")]
     fn bit_is_set_oob() {
         let registers = Registers::new();
-        registers.accumulator.bit_is_set(8);
+        registers.accumulator.get_nth_bit(8);
     }
 }
