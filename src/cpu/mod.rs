@@ -26,17 +26,13 @@ impl Cpu {
                     self.registers.program_counter += 1;
                     self.registers.accumulator = param;
 
-                    if self.registers.accumulator == 0 {
-                        self.registers.status |= 0b0000_0010;
-                    } else {
-                        self.registers.status &= 0b1111_1101;
-                    }
+                    self.registers
+                        .status
+                        .set('Z', self.registers.accumulator == 0);
 
-                    if self.registers.accumulator & 0b1000_0000 == 0 {
-                        self.registers.status &= 0b0111_1111;
-                    } else {
-                        self.registers.status |= 0b1000_0000;
-                    }
+                    self.registers
+                        .status
+                        .set('N', self.registers.accumulator & 0b1000_0000 != 0);
                 }
 
                 _ => todo!(),
