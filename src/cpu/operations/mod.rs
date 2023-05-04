@@ -2,16 +2,16 @@ use super::{registers::Register, Cpu};
 
 impl Cpu {
     /// Loads a byte of memory into the accumulator setting the zero and negative flags as appropriate.
-    pub fn lda(&mut self, program: &[u8]) {
-        let param = self.get_param(program);
+    pub fn lda(&mut self) {
+        let param = self.get_param();
 
         self.registers.accumulator = param;
         self.update_zero_and_negative_flags(self.registers.accumulator);
     }
 
     /// Loads a byte of memory into the X register setting the zero and negative flags as appropriate.
-    pub fn ldx(&mut self, program: &[u8]) {
-        let param = self.get_param(program);
+    pub fn ldx(&mut self) {
+        let param = self.get_param();
 
         self.registers.index_x = param;
         self.update_zero_and_negative_flags(self.registers.index_x);
@@ -35,8 +35,8 @@ impl Cpu {
         self.registers.status.set_flag('N', result.get_nth_bit(7));
     }
 
-    fn get_param(&mut self, program: &[u8]) -> u8 {
-        let param = program[self.registers.program_counter as usize];
+    fn get_param(&mut self) -> u8 {
+        let param = self.memory.read(self.registers.program_counter);
         self.registers.program_counter += 1;
 
         param
@@ -50,7 +50,8 @@ mod tests {
     #[test]
     fn multiple_ops_1() {
         let mut cpu = Cpu::new();
-        cpu.interpret(&[0xA9, 0xC0, 0xAA, 0xE8, 0x00]);
+        cpu.load_program(&[0xA9, 0xC0, 0xAA, 0xE8, 0x00]);
+        cpu.run();
 
         assert_eq!(cpu.registers.index_x, 0xC1);
     }
@@ -58,7 +59,8 @@ mod tests {
     #[test]
     fn lda_0xa9_immediate_load_data() {
         let mut cpu = Cpu::new();
-        cpu.interpret(&[0xA9, 0x05, 0x00]);
+        cpu.load_program(&[0xA9, 0x05, 0x00]);
+        cpu.run();
 
         assert_eq!(cpu.registers.accumulator, 0x05);
         assert!(!cpu.registers.status.get_flag('Z'));
@@ -68,7 +70,8 @@ mod tests {
     #[test]
     fn lda_0xa9_zero_flag() {
         let mut cpu = Cpu::new();
-        cpu.interpret(&[0xA9, 0x00, 0x00]);
+        cpu.load_program(&[0xA9, 0x00, 0x00]);
+        cpu.run();
 
         assert!(cpu.registers.status.get_flag('Z'));
     }
@@ -76,7 +79,8 @@ mod tests {
     #[test]
     fn ldx_0xa2_immediate_load_data() {
         let mut cpu = Cpu::new();
-        cpu.interpret(&[0xA2, 0x05, 0x00]);
+        cpu.load_program(&[0xA2, 0x05, 0x00]);
+        cpu.run();
 
         assert_eq!(cpu.registers.index_x, 0x05);
         assert!(!cpu.registers.status.get_flag('Z'));
@@ -86,7 +90,8 @@ mod tests {
     #[test]
     fn ldx_0xa2_zero_flag() {
         let mut cpu = Cpu::new();
-        cpu.interpret(&[0xA2, 0x00, 0x00]);
+        cpu.load_program(&[0xA2, 0x00, 0x00]);
+        cpu.run();
 
         assert!(cpu.registers.status.get_flag('Z'));
     }
@@ -94,7 +99,8 @@ mod tests {
     #[test]
     fn tax_0xaa_move_a_to_x() {
         let mut cpu = Cpu::new();
-        cpu.interpret(&[0xA9, 0x0A, 0xAA, 0x00]);
+        cpu.load_program(&[0xA9, 0x0A, 0xAA, 0x00]);
+        cpu.run();
 
         assert_eq!(cpu.registers.index_x, 0x0A);
     }
@@ -103,7 +109,8 @@ mod tests {
     #[should_panic(expected = "attempt to add with overflow")]
     fn inx_0xe8_overflow() {
         let mut cpu = Cpu::new();
-        cpu.interpret(&[0xA2, 0xFF, 0xE8, 0x00]);
+        cpu.load_program(&[0xA2, 0xFF, 0xE8, 0x00]);
+        cpu.run();
 
         assert_eq!(cpu.registers.index_x, 1);
     }
