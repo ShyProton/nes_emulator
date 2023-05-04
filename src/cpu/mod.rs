@@ -19,8 +19,7 @@ impl Cpu {
 
     pub fn run(&mut self) {
         loop {
-            let opcode = self.memory.read(self.registers.program_counter);
-            self.registers.program_counter += 1;
+            let opcode = self.read_instruction();
 
             match opcode {
                 0x00 => return, // BRK
@@ -37,7 +36,13 @@ impl Cpu {
 
     pub fn load_program(&mut self, program: &[u8]) {
         self.memory.load(program);
-        self.registers.reset_registers();
-        self.registers.program_counter = Memory::PRG_ROM_START;
+        self.registers.reset(&self.memory);
+    }
+
+    fn read_instruction(&mut self) -> u8 {
+        let opcode = self.memory.read(self.registers.program_counter);
+        self.registers.program_counter += 1;
+
+        opcode
     }
 }

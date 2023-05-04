@@ -1,3 +1,4 @@
+use super::super::memory::Memory;
 use status::Status;
 
 mod status;
@@ -34,12 +35,13 @@ impl Registers {
         }
     }
 
-    pub fn reset_registers(&mut self) {
-        self.program_counter = 0x0000;
+    pub fn reset(&mut self, memory: &Memory) {
         self.stack_pointer = 0x00;
         self.accumulator = 0x00;
         self.index_x = 0x00;
         self.index_y = 0x00;
+
+        self.program_counter = memory.read_u16(Memory::PROGRAM_COUNTER_ADDRESS);
         self.status.reset_flags();
     }
 }

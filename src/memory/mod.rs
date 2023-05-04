@@ -5,6 +5,7 @@ pub struct Memory {
 
 impl Memory {
     pub const PRG_ROM_START: u16 = 0x8000;
+    pub const PROGRAM_COUNTER_ADDRESS: u16 = 0xFFFC;
 
     pub const fn new() -> Self {
         Self {
@@ -20,8 +21,26 @@ impl Memory {
         self.memory[address as usize] = data;
     }
 
+    pub fn read_u16(&self, address: u16) -> u16 {
+        // Reading as little-endian.
+        let lo = u16::from(self.read(address));
+        let hi = u16::from(self.read(address + 1));
+        (hi << 8) | lo
+    }
+
+    pub fn write_u16(&mut self, address: u16, data: u16) {
+        // Writing as little-endian.
+        let hi = (data >> 8) as u8;
+        let lo = (data & 0xFF) as u8;
+
+        self.write(address, lo);
+        self.write(address + 1, hi);
+    }
+
     pub fn load(&mut self, program: &[u8]) {
-        let start_idx = Self::PRG_ROM_START as usize;
-        self.memory[start_idx..(start_idx + program.len())].copy_from_slice(program);
+        let mem_idx = Self::PRG_ROM_START as usize;
+        self.memory[mem_idx..(mem_idx + program.len())].copy_from_slice(program);
+
+        self.write_u16(Self::PROGRAM_COUNTER_ADDRESS, Self::PRG_ROM_START);
     }
 }
