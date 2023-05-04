@@ -13,7 +13,7 @@ impl Status {
         }
     }
 
-    pub fn set(&mut self, flag: char, setting: bool) {
+    pub fn set_flag(&mut self, flag: char, setting: bool) {
         let shift = Self::flag_pos(flag);
         let mask = 0b0000_0001 << shift;
 
@@ -24,7 +24,7 @@ impl Status {
         }
     }
 
-    pub fn get(&self, flag: char) -> bool {
+    pub fn get_flag(&self, flag: char) -> bool {
         let position = Self::flag_pos(flag);
         self.status.get_nth_bit(position)
     }
@@ -53,11 +53,11 @@ mod tests {
         for flag in Status::FLAGS {
             status.reset_flags();
 
-            status.set(flag, true);
-            assert!(status.get(flag));
+            status.set_flag(flag, true);
+            assert!(status.get_flag(flag));
 
-            status.set(flag, false);
-            assert!(!status.get(flag));
+            status.set_flag(flag, false);
+            assert!(!status.get_flag(flag));
         }
     }
 
@@ -67,6 +67,6 @@ mod tests {
         let mut status = Status::new();
 
         // The 'A' status flag does not exist.
-        status.set('A', true);
+        status.set_flag('A', true);
     }
 }

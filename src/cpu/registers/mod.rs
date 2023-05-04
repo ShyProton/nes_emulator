@@ -49,7 +49,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn bit_is_set() {
+    fn get_nth_bit() {
         let mut registers = Registers::new();
 
         for pos in 0..7 {
@@ -65,7 +65,7 @@ mod tests {
 
     #[test]
     #[should_panic(expected = "Bit position is out of bounds")]
-    fn bit_is_set_oob() {
+    fn get_nth_bit_oob() {
         let registers = Registers::new();
         registers.accumulator.get_nth_bit(8);
     }
