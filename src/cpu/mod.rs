@@ -25,7 +25,9 @@ impl Cpu {
                 0x00 => return, // BRK
 
                 0xA9 => self.lda(program),
+                0xA2 => self.ldx(program),
                 0xAA => self.tax(),
+                0xE8 => self.inx(),
 
                 _ => panic!("Invalid opcode"),
             }
