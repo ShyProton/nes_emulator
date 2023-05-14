@@ -1,8 +1,11 @@
-use super::{Cpu, Register};
+use super::{Cpu, RegisterByte};
 
 use addressing_mode::AddressingMode;
+use main::Instruction;
+use opcodes::INSTRUCTION_LOOKUP;
 
 mod addressing_mode;
-mod instruction;
+mod main;
+mod opcodes;
 mod set;
 mod utils;

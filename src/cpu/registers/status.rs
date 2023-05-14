@@ -1,4 +1,4 @@
-use super::Register;
+use super::RegisterByte;
 
 pub struct Status {
     status: u8,

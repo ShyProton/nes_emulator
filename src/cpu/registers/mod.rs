@@ -1,4 +1,4 @@
-pub use main::{Register, Registers};
+pub use main::{RegisterByte, Registers};
 
 use super::Memory;
 use status::Status;

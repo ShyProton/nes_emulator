@@ -1,6 +1,4 @@
-use super::{AddressingMode, Cpu};
-
-use phf::phf_map;
+use super::{AddressingMode, Cpu, INSTRUCTION_LOOKUP};
 
 pub struct Instruction {
     name: &'static str,
@@ -10,7 +8,7 @@ pub struct Instruction {
 }
 
 impl Instruction {
-    const fn new(name: &'static str, bytes: u8, cycles: u8, addr_mode: AddressingMode) -> Self {
+    pub const fn new(name: &'static str, bytes: u8, cycles: u8, addr_mode: AddressingMode) -> Self {
         Self {
             name,
             bytes,
@@ -26,7 +24,7 @@ impl Cpu {
     pub fn execute_instruction(&mut self) -> bool {
         let opcode = self.memory.read(self.registers.program_counter);
 
-        let instruction = CPU_INSTRUCTIONS.get(&[opcode]).map_or_else(
+        let instruction = INSTRUCTION_LOOKUP.get(&[opcode]).map_or_else(
             || panic!("invalid opcode lookup for instruction"),
             |instruction| instruction,
         );
@@ -46,18 +44,3 @@ impl Cpu {
         true
     }
 }
-
-// TODO: Implement the rest of the CPU instructions.
-pub static CPU_INSTRUCTIONS: phf::Map<[u8; 1], Instruction> = phf_map! {
-    [0x00] => Instruction::new("BRK", 1, 7, AddressingMode::Implied),
-
-    [0xA9] => Instruction::new("LDA", 2, 2, AddressingMode::Immediate),
-    [0xA5] => Instruction::new("LDA", 2, 3, AddressingMode::ZeroPage),
-
-    [0xA2] => Instruction::new("LDX", 2, 2, AddressingMode::Immediate),
-
-    [0x85] => Instruction::new("STA", 2, 3, AddressingMode::ZeroPage),
-
-    [0xAA] => Instruction::new("TAX", 1, 2, AddressingMode::Implied),
-    [0xE8] => Instruction::new("INX", 1, 2, AddressingMode::Implied)
-};

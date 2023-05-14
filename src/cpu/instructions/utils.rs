@@ -1,4 +1,4 @@
-use super::{AddressingMode, Cpu, Register};
+use super::{AddressingMode, Cpu, RegisterByte};
 
 impl Cpu {
     pub fn update_zero_and_negative_flags(&mut self, result: u8) {
