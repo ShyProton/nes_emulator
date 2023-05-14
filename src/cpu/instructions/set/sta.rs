@@ -1,4 +1,4 @@
-use crate::cpu::{instructions::AddressingMode, Cpu};
+use super::{AddressingMode, Cpu};
 
 impl Cpu {
     /// Stores the contents of the accumulator into memory.

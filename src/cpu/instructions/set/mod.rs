@@ -1,3 +1,5 @@
+use super::{AddressingMode, Cpu};
+
 mod inx;
 mod lda;
 mod ldx;
@@ -6,7 +8,7 @@ mod tax;
 
 #[cfg(test)]
 mod tests {
-    use crate::Cpu;
+    use super::*;
 
     #[test]
     fn conglomerate_1() {

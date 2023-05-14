@@ -1,4 +1,4 @@
-use crate::cpu::Cpu;
+use super::Cpu;
 
 impl Cpu {
     /// Adds one to the X register setting the zero and negative flags as appropriate.

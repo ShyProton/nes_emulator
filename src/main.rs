@@ -1,4 +1,5 @@
 use cpu::Cpu;
+use memory::Memory;
 
 mod cpu;
 mod memory;

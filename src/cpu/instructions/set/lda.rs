@@ -1,4 +1,4 @@
-use crate::cpu::{instructions::AddressingMode, Cpu};
+use super::{AddressingMode, Cpu};
 
 impl Cpu {
     /// Loads a byte of memory into the accumulator setting the zero and negative flags as appropriate.

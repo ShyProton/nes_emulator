@@ -1,4 +1,4 @@
-use crate::cpu::Cpu;
+use super::Cpu;
 
 impl Cpu {
     /// Copies the current contents of the accumulator into the X register and sets the zero and

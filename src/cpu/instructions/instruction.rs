@@ -1,5 +1,4 @@
-use super::addressing_mode::AddressingMode;
-use crate::cpu::Cpu;
+use super::{AddressingMode, Cpu};
 
 use phf::phf_map;
 
