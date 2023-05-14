@@ -11,7 +11,7 @@ pub enum AddressingMode {
     AbsoluteY,
     IndirectX,
     IndirectY,
-    NoneAddressing,
+    Implied,
 }
 
 impl Cpu {
@@ -27,7 +27,8 @@ impl Cpu {
             AddressingMode::AbsoluteX => self.absolute(self.registers.index_x),
             AddressingMode::AbsoluteY => self.absolute(self.registers.index_y),
 
-            // TODO: Test this using the JMP command.
+            // TODO: Extract Indirect implementations to a single method.
+            // TODO: Test Indirect implementations with the JMP command.
             AddressingMode::IndirectX => {
                 let base = self.memory.read(self.registers.program_counter);
 
@@ -38,7 +39,6 @@ impl Cpu {
                 u16::from(hi) << 8 | u16::from(lo)
             }
 
-            // TODO: Test this using the JMP command.
             AddressingMode::IndirectY => {
                 let base = self.memory.read(self.registers.program_counter);
 
@@ -49,12 +49,12 @@ impl Cpu {
                 deref_base.wrapping_add(self.registers.index_y.into())
             }
 
-            AddressingMode::NoneAddressing => {
-                panic!("mode {addr_mode:?} is not supported");
+            AddressingMode::Implied => {
+                panic!("mode is implied, address does not need to be looked up");
             }
         };
 
-        // Must increment PC after each byte being read from the instructions.
+        // Always reads at least one byte.
         self.registers.program_counter += 1;
 
         addr
@@ -65,8 +65,10 @@ impl Cpu {
         u16::from(pos.wrapping_add(register))
     }
 
-    fn absolute(&self, register: u8) -> u16 {
+    fn absolute(&mut self, register: u8) -> u16 {
         let base = self.memory.read_u16(self.registers.program_counter);
+        self.registers.program_counter += 1; // Reads an extra byte.
+
         base.wrapping_add(u16::from(register))
     }
 }

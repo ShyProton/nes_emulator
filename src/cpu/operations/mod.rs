@@ -1,7 +1,8 @@
 mod addressing_mode;
+mod opcode;
 
 use super::{registers::Register, Cpu};
-pub use addressing_mode::AddressingMode;
+use addressing_mode::AddressingMode;
 
 impl Cpu {
     /// Loads a byte of memory into the accumulator setting the zero and negative flags as appropriate.
@@ -65,7 +66,7 @@ mod tests {
 
     // TODO: Rename tests in relation to their addressing modes.
     #[test]
-    fn lda_0xa9_immediate_load_data() {
+    fn lda_imm_load_data() {
         let mut cpu = Cpu::new();
         cpu.load_program(&[0xA9, 0x05, 0x00]);
         cpu.run();
@@ -76,7 +77,7 @@ mod tests {
     }
 
     #[test]
-    fn lda_0xa9_zero_flag() {
+    fn lda_imm_zero_flag() {
         let mut cpu = Cpu::new();
         cpu.load_program(&[0xA9, 0x00, 0x00]);
         cpu.run();
@@ -85,7 +86,7 @@ mod tests {
     }
 
     #[test]
-    fn lda_0xa5_from_memory() {
+    fn lda_zero_from_memory() {
         let mut cpu = Cpu::new();
         cpu.memory.write(0x10, 0x55);
 
@@ -96,7 +97,7 @@ mod tests {
     }
 
     #[test]
-    fn ldx_0xa2_immediate_load_data() {
+    fn ldx_imm_load_data() {
         let mut cpu = Cpu::new();
         cpu.load_program(&[0xA2, 0x05, 0x00]);
         cpu.run();
@@ -107,7 +108,7 @@ mod tests {
     }
 
     #[test]
-    fn ldx_0xa2_zero_flag() {
+    fn ldx_imm_zero_flag() {
         let mut cpu = Cpu::new();
         cpu.load_program(&[0xA2, 0x00, 0x00]);
         cpu.run();
@@ -116,7 +117,7 @@ mod tests {
     }
 
     #[test]
-    fn tax_0xaa_move_a_to_x() {
+    fn tax_move_a_to_x() {
         let mut cpu = Cpu::new();
         cpu.load_program(&[0xA9, 0x0A, 0xAA, 0x00]);
         cpu.run();
@@ -126,7 +127,7 @@ mod tests {
 
     #[test]
     #[should_panic(expected = "attempt to add with overflow")]
-    fn inx_0xe8_overflow() {
+    fn inx_overflow() {
         let mut cpu = Cpu::new();
         cpu.load_program(&[0xA2, 0xFF, 0xE8, 0x00]);
         cpu.run();
@@ -135,7 +136,7 @@ mod tests {
     }
 
     #[test]
-    fn sta_0x85_store_mem() {
+    fn sta_zero_store_mem() {
         let mut cpu = Cpu::new();
         cpu.load_program(&[0xA9, 0x55, 0x85, 0x69]);
         cpu.run();
