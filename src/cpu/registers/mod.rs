@@ -9,7 +9,7 @@ pub trait Register {
 
 impl Register for u8 {
     fn get_nth_bit(&self, position: usize) -> bool {
-        assert!(position <= 7, "Bit position is out of bounds");
+        assert!(position <= 7, "bit position is out of bounds");
         self & (0b0000_0001 << position) != 0
     }
 }
@@ -66,7 +66,7 @@ mod tests {
     }
 
     #[test]
-    #[should_panic(expected = "Bit position is out of bounds")]
+    #[should_panic(expected = "bit position is out of bounds")]
     fn get_nth_bit_oob() {
         let registers = Registers::new();
         registers.accumulator.get_nth_bit(8);

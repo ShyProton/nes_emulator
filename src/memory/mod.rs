@@ -21,6 +21,7 @@ impl Memory {
         self.memory[address as usize] = data;
     }
 
+    /// Reads a two-byte sequence of data from a memory address.
     pub fn read_u16(&self, address: u16) -> u16 {
         // Reading as little-endian.
         let lo = u16::from(self.read(address));
@@ -28,6 +29,7 @@ impl Memory {
         (hi << 8) | lo
     }
 
+    /// Writes a two-byte sequence of data to a memory address.
     pub fn write_u16(&mut self, address: u16, data: u16) {
         // Writing as little-endian.
         let hi = (data >> 8) as u8;

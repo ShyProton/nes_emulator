@@ -38,7 +38,7 @@ impl Status {
             .iter()
             .rev()
             .position(|&val| val == flag)
-            .map_or_else(|| panic!("Invalid status flag"), |pos| pos)
+            .map_or_else(|| panic!("invalid status flag"), |pos| pos)
     }
 }
 
@@ -62,7 +62,7 @@ mod tests {
     }
 
     #[test]
-    #[should_panic(expected = "Invalid status flag")]
+    #[should_panic(expected = "invalid status flag")]
     fn nonexistent_flag_setting() {
         let mut status = Status::new();
 
