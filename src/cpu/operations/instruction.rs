@@ -48,6 +48,7 @@ impl Cpu {
     }
 }
 
+// TODO: Implement the rest of the CPU instructions.
 pub static CPU_INSTRUCTIONS: phf::Map<[u8; 1], Instruction> = phf_map! {
     [0x00] => Instruction::new("BRK", 1, 7, AddressingMode::Implied),
 

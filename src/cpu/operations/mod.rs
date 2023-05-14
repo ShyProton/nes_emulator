@@ -1,5 +1,5 @@
 mod addressing_mode;
-mod opcode;
+mod instruction;
 
 use super::{registers::Register, Cpu};
 use addressing_mode::AddressingMode;
