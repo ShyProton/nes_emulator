@@ -1,6 +1,7 @@
 use super::{AddressingMode, Cpu};
 
 impl Cpu {
+    /// STA - Store Accumulator.
     /// Stores the contents of the accumulator into memory.
     pub fn sta(&mut self, addr_mode: &AddressingMode) {
         let addr = self.get_operand_address(addr_mode);

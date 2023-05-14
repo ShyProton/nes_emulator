@@ -1,7 +1,9 @@
 use super::{AddressingMode, Cpu};
 
 impl Cpu {
-    /// Loads a byte of memory into the accumulator setting the zero and negative flags as appropriate.
+    /// LDA - Load Accumulator.
+    /// Loads a byte of memory into the accumulator setting the zero and negative flags as
+    /// appropriate.
     pub fn lda(&mut self, addr_mode: &AddressingMode) {
         let value = self.get_value(addr_mode);
 

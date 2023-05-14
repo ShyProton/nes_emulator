@@ -1,7 +1,9 @@
 use super::{AddressingMode, Cpu};
 
 impl Cpu {
-    /// Loads a byte of memory into the X register setting the zero and negative flags as appropriate.
+    /// LDX - Load X Register.
+    /// Loads a byte of memory into the X register setting the zero and negative flags as
+    /// appropriate.
     pub fn ldx(&mut self, addr_mode: &AddressingMode) {
         let value = self.get_value(addr_mode);
 

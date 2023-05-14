@@ -1,6 +1,7 @@
 use super::Cpu;
 
 impl Cpu {
+    /// TAX - Transfer Accumulator to X.
     /// Copies the current contents of the accumulator into the X register and sets the zero and
     /// negative flags as appropriate.
     pub fn tax(&mut self) {

@@ -1,6 +1,7 @@
 use super::Cpu;
 
 impl Cpu {
+    /// INX - Increment X Register.
     /// Adds one to the X register setting the zero and negative flags as appropriate.
     pub fn inx(&mut self) {
         self.registers.index_x += 1;
