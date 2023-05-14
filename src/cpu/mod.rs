@@ -1,4 +1,4 @@
-mod operations;
+mod instructions;
 mod registers;
 
 use super::memory::Memory;
