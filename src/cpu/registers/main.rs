@@ -41,6 +41,16 @@ impl Registers {
         self.program_counter = memory.read_u16(Memory::PROGRAM_COUNTER_ADDRESS);
         self.status.reset_flags();
     }
+
+    #[cfg(test)]
+    pub fn by_alias(&self, alias: char) -> &u8 {
+        match alias {
+            'A' => &self.accumulator,
+            'X' => &self.index_x,
+            'Y' => &self.index_y,
+            _ => panic!("invalid register code lookup"),
+        }
+    }
 }
 
 #[cfg(test)]

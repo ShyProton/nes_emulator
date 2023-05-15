@@ -1,9 +1,7 @@
 use super::{AddressingMode, Cpu};
 
 mod inx;
-mod lda;
-mod ldx;
-mod ldy;
+mod load;
 mod sta;
 mod tax;
 mod tests;
