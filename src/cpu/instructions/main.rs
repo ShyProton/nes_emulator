@@ -33,10 +33,15 @@ impl Cpu {
 
         match instruction.name {
             "BRK" => return false,
+
             "LDA" => self.lda(&instruction.addr_mode),
             "LDX" => self.ldx(&instruction.addr_mode),
             "LDY" => self.ldy(&instruction.addr_mode),
+
             "STA" => self.sta(&instruction.addr_mode),
+            "STX" => self.stx(&instruction.addr_mode),
+            "STY" => self.sty(&instruction.addr_mode),
+
             "TAX" => self.tax(),
             "INX" => self.inx(),
             _ => panic!("{} is not a valid instruction", instruction.name),

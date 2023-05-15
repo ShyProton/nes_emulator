@@ -40,6 +40,14 @@ pub static INSTRUCTION_LOOKUP: phf::Map<[u8; 1], Instruction> = phf_map! {
     [0x81] => Instruction::new("STA", 2, 6, IndirectX),
     [0x91] => Instruction::new("STA", 2, 6, IndirectY),
 
+    [0x86] => Instruction::new("STX", 2, 3, ZeroPage),
+    [0x96] => Instruction::new("STX", 2, 4, ZeroPageY),
+    [0x8E] => Instruction::new("STX", 3, 4, Absolute),
+
+    [0x84] => Instruction::new("STY", 2, 3, ZeroPage),
+    [0x94] => Instruction::new("STY", 2, 4, ZeroPageX),
+    [0x8C] => Instruction::new("STY", 3, 4, Absolute),
+
     [0xAA] => Instruction::new("TAX", 1, 2, Implied),
     [0xE8] => Instruction::new("INX", 1, 2, Implied)
 };

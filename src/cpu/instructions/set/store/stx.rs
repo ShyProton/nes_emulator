@@ -1,13 +1,32 @@
-use super::{AddressingMode, Cpu};
+use super::{AddressingMode, Cpu, RegisterAlias};
+
+#[cfg(test)]
+use super::test_templates::{absolute, zero};
 
 impl Cpu {
-    /// STX - Store X Register.
+    /// STX - Store X register.
     /// Stores the contents of the X register into memory.
     pub fn stx(&mut self, addr_mode: &AddressingMode) {
-        let addr = self.get_operand_address(addr_mode);
-        self.memory.write(addr, self.registers.index_x);
+        self.store(addr_mode, &RegisterAlias::X);
     }
 }
 
 #[cfg(test)]
-mod tests {}
+mod tests {
+    use super::{absolute, zero, RegisterAlias};
+
+    #[test]
+    fn zero_store_mem() {
+        zero::store_mem(0x86, &RegisterAlias::X);
+    }
+
+    #[test]
+    fn zero_y_store_mem() {
+        zero::y_store_mem(0x96, &RegisterAlias::X);
+    }
+
+    #[test]
+    fn abs_store_mem() {
+        absolute::store_mem(0x8E, &RegisterAlias::X);
+    }
+}
