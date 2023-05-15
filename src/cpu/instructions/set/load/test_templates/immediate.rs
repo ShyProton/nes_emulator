@@ -1,6 +1,6 @@
-use super::Cpu;
+use super::{Cpu, RegisterAlias};
 
-pub fn load_data(opcode: u8, target_alias: char) {
+pub fn load_data(opcode: u8, target_alias: &RegisterAlias) {
     let mut cpu = Cpu::new();
     cpu.load_program(&[opcode, 0x55]);
     cpu.run();

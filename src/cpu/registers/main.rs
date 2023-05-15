@@ -11,6 +11,13 @@ impl RegisterByte for u8 {
     }
 }
 
+#[cfg(test)]
+pub enum RegisterAlias {
+    A,
+    X,
+    Y,
+}
+
 pub struct Registers {
     pub program_counter: u16,
     pub stack_pointer: u8,
@@ -43,12 +50,11 @@ impl Registers {
     }
 
     #[cfg(test)]
-    pub fn by_alias(&self, alias: char) -> &u8 {
+    pub fn by_alias(&mut self, alias: &RegisterAlias) -> &mut u8 {
         match alias {
-            'A' => &self.accumulator,
-            'X' => &self.index_x,
-            'Y' => &self.index_y,
-            _ => panic!("invalid register code lookup"),
+            RegisterAlias::A => &mut self.accumulator,
+            RegisterAlias::X => &mut self.index_x,
+            RegisterAlias::Y => &mut self.index_y,
         }
     }
 }

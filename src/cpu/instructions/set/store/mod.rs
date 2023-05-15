@@ -3,10 +3,9 @@ use super::{AddressingMode, Cpu};
 #[cfg(test)]
 use super::RegisterAlias;
 
-mod inx;
-mod load;
-mod store;
-mod tax;
+mod sta;
+mod stx;
+mod sty;
 
 #[cfg(test)]
-mod tests;
+mod test_templates;

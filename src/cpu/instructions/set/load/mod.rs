@@ -1,5 +1,8 @@
 use super::{AddressingMode, Cpu};
 
+#[cfg(test)]
+use super::RegisterAlias;
+
 mod lda;
 mod ldx;
 mod ldy;

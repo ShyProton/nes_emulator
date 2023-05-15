@@ -1,6 +1,6 @@
-use super::Cpu;
+use super::{Cpu, RegisterAlias};
 
-pub fn from_memory(opcode: u8, target_alias: char) {
+pub fn from_memory(opcode: u8, target_alias: &RegisterAlias) {
     let mut cpu = Cpu::new();
     cpu.load_program(&[opcode, 0x10]);
 
@@ -11,7 +11,7 @@ pub fn from_memory(opcode: u8, target_alias: char) {
     assert_eq!(*cpu.registers.by_alias(target_alias), 0x55);
 }
 
-pub fn x_from_memory(opcode: u8, target_alias: char) {
+pub fn x_from_memory(opcode: u8, target_alias: &RegisterAlias) {
     let mut cpu = Cpu::new();
     cpu.load_program(&[opcode, 0x06]);
 
@@ -23,7 +23,7 @@ pub fn x_from_memory(opcode: u8, target_alias: char) {
     assert_eq!(*cpu.registers.by_alias(target_alias), 0x55);
 }
 
-pub fn y_from_memory(opcode: u8, target_alias: char) {
+pub fn y_from_memory(opcode: u8, target_alias: &RegisterAlias) {
     let mut cpu = Cpu::new();
     cpu.load_program(&[opcode, 0x06]);
 

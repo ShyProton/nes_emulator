@@ -11,11 +11,14 @@ impl Cpu {
 
 #[cfg(test)]
 mod tests {
-    use super::super::test_templates::{absolute, immediate, zero};
+    use super::super::{
+        test_templates::{absolute, immediate, zero},
+        RegisterAlias,
+    };
 
     #[test]
     fn imm_load_data() {
-        immediate::load_data(0xA2, 'X');
+        immediate::load_data(0xA2, &RegisterAlias::X);
     }
 
     #[test]
@@ -25,21 +28,21 @@ mod tests {
 
     #[test]
     fn zero_from_memory() {
-        zero::from_memory(0xA6, 'X');
+        zero::from_memory(0xA6, &RegisterAlias::X);
     }
 
     #[test]
     fn zeroy_from_memory() {
-        zero::y_from_memory(0xB6, 'X');
+        zero::y_from_memory(0xB6, &RegisterAlias::X);
     }
 
     #[test]
     fn abs_from_memory() {
-        absolute::from_memory(0xAE, 'X');
+        absolute::from_memory(0xAE, &RegisterAlias::X);
     }
 
     #[test]
     fn absy_from_memory() {
-        absolute::y_from_memory(0xBE, 'X');
+        absolute::y_from_memory(0xBE, &RegisterAlias::X);
     }
 }
