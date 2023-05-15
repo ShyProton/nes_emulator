@@ -11,35 +11,35 @@ impl Cpu {
 
 #[cfg(test)]
 mod tests {
-    use super::super::test_templates;
+    use super::super::test_templates::{absolute, immediate, zero};
 
     #[test]
     fn imm_load_data() {
-        test_templates::imm::load_data(0xA2, 'X');
+        immediate::load_data(0xA2, 'X');
     }
 
     #[test]
     fn imm_zero_flag() {
-        test_templates::imm::z_flag_set(0xA2);
+        immediate::z_flag_set(0xA2);
     }
 
     #[test]
     fn zero_from_memory() {
-        test_templates::zero::from_memory(0xA6, 'X');
+        zero::from_memory(0xA6, 'X');
     }
 
     #[test]
     fn zeroy_from_memory() {
-        test_templates::zero::y_from_memory(0xB6, 'X');
+        zero::y_from_memory(0xB6, 'X');
     }
 
     #[test]
     fn abs_from_memory() {
-        test_templates::abs::from_memory(0xAE, 'X');
+        absolute::from_memory(0xAE, 'X');
     }
 
     #[test]
     fn absy_from_memory() {
-        test_templates::abs::y_from_memory(0xBE, 'X');
+        absolute::y_from_memory(0xBE, 'X');
     }
 }
