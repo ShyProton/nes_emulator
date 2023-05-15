@@ -1,20 +1,20 @@
-use super::{AddressingMode, Cpu};
+use super::{AddressingMode, Cpu, RegisterAlias};
+
+#[cfg(test)]
+use super::test_templates::{absolute, immediate, indirect, zero};
 
 impl Cpu {
     /// LDA - Load Accumulator.
     /// Loads a byte of memory into the accumulator setting the zero and negative flags as
     /// appropriate.
     pub fn lda(&mut self, addr_mode: &AddressingMode) {
-        self.registers.accumulator = self.load(addr_mode);
+        self.load(addr_mode, &RegisterAlias::A);
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use super::super::{
-        test_templates::{absolute, immediate, indirect, zero},
-        RegisterAlias,
-    };
+    use super::{absolute, immediate, indirect, zero, RegisterAlias};
 
     #[test]
     fn imm_load_data() {

@@ -2,10 +2,7 @@ pub use main::Cpu;
 
 use super::Memory;
 
-use registers::{RegisterByte, Registers};
-
-#[cfg(test)]
-use registers::RegisterAlias;
+use registers::{RegisterAlias, RegisterByte, Registers};
 
 mod instructions;
 mod main;

@@ -1,20 +1,19 @@
-use super::{AddressingMode, Cpu};
+use super::{AddressingMode, Cpu, RegisterAlias};
+
+#[cfg(test)]
+use super::test_templates::{absolute, indirect, zero};
 
 impl Cpu {
     /// STA - Store Accumulator.
     /// Stores the contents of the accumulator into memory.
     pub fn sta(&mut self, addr_mode: &AddressingMode) {
-        let addr = self.get_operand_address(addr_mode);
-        self.memory.write(addr, self.registers.accumulator);
+        self.store(addr_mode, &RegisterAlias::A);
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use super::super::{
-        test_templates::{absolute, indirect, zero},
-        RegisterAlias,
-    };
+    use super::{absolute, indirect, zero, RegisterAlias};
 
     #[test]
     fn zero_store_mem() {

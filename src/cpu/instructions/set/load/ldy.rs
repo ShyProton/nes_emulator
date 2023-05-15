@@ -1,20 +1,20 @@
-use super::{AddressingMode, Cpu};
+use super::{AddressingMode, Cpu, RegisterAlias};
+
+#[cfg(test)]
+use super::test_templates::{absolute, immediate, zero};
 
 impl Cpu {
     /// LDY - Load Y Register.
     /// Loads a byte of memory into the Y register setting the zero and negative flags as
     /// appropriate.
     pub fn ldy(&mut self, addr_mode: &AddressingMode) {
-        self.registers.index_y = self.load(addr_mode);
+        self.load(addr_mode, &RegisterAlias::Y);
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use super::super::{
-        test_templates::{absolute, immediate, zero},
-        RegisterAlias,
-    };
+    use super::{absolute, immediate, zero, RegisterAlias};
 
     #[test]
     fn imm_load_data() {

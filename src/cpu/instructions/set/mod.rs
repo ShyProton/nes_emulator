@@ -1,7 +1,4 @@
-use super::{AddressingMode, Cpu};
-
-#[cfg(test)]
-use super::RegisterAlias;
+use super::{AddressingMode, Cpu, RegisterAlias};
 
 mod inx;
 mod load;

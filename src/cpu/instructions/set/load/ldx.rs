@@ -1,20 +1,20 @@
-use super::{AddressingMode, Cpu};
+use super::{AddressingMode, Cpu, RegisterAlias};
+
+#[cfg(test)]
+use super::test_templates::{absolute, immediate, zero};
 
 impl Cpu {
     /// LDX - Load X Register.
     /// Loads a byte of memory into the X register setting the zero and negative flags as
     /// appropriate.
     pub fn ldx(&mut self, addr_mode: &AddressingMode) {
-        self.registers.index_x = self.load(addr_mode);
+        self.load(addr_mode, &RegisterAlias::X);
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use super::super::{
-        test_templates::{absolute, immediate, zero},
-        RegisterAlias,
-    };
+    use super::{absolute, immediate, zero, RegisterAlias};
 
     #[test]
     fn imm_load_data() {

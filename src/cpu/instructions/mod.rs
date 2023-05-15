@@ -1,7 +1,4 @@
-use super::{Cpu, RegisterByte};
-
-#[cfg(test)]
-use super::RegisterAlias;
+use super::{Cpu, RegisterAlias, RegisterByte};
 
 use addressing_mode::AddressingMode;
 use main::Instruction;

@@ -1,10 +1,10 @@
-pub use main::{RegisterByte, Registers};
+pub use main::Registers;
 
-#[cfg(test)]
-pub use main::RegisterAlias;
+pub use utils::{RegisterAlias, RegisterByte};
 
 use super::Memory;
 use status::Status;
 
 mod main;
 mod status;
+mod utils;
