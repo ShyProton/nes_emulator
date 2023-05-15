@@ -1,11 +1,11 @@
 use super::{Cpu, RegisterAlias};
 
-pub fn load_data(opcode: u8, target_alias: &RegisterAlias) {
+pub fn load_data(opcode: u8, target: &RegisterAlias) {
     let mut cpu = Cpu::new();
     cpu.load_program(&[opcode, 0x55]);
     cpu.run();
 
-    assert_eq!(*cpu.registers.by_alias(target_alias), 0x55);
+    assert_eq!(*cpu.registers.by_alias(target), 0x55);
     assert!(!cpu.registers.status.get_flag('Z'));
     assert!(!cpu.registers.status.get_flag('N'));
 }

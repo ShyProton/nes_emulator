@@ -10,7 +10,8 @@ impl RegisterByte for u8 {
 }
 
 pub enum RegisterAlias {
-    A,
-    X,
-    Y,
+    A, // Accumulator
+    X, // X Register
+    Y, // Y Register
+    S, // Stack Pointer
 }
