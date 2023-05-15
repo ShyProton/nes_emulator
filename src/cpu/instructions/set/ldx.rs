@@ -19,7 +19,7 @@ mod tests {
     #[test]
     fn imm_load_data() {
         let mut cpu = Cpu::new();
-        cpu.load_program(&[0xA2, 0x05, 0x00]);
+        cpu.load_program(&[0xA2, 0x05]);
         cpu.run();
 
         assert_eq!(cpu.registers.index_x, 0x05);
@@ -30,9 +30,59 @@ mod tests {
     #[test]
     fn imm_zero_flag() {
         let mut cpu = Cpu::new();
-        cpu.load_program(&[0xA2, 0x00, 0x00]);
+        cpu.load_program(&[0xA2, 0x00]);
         cpu.run();
 
         assert!(cpu.registers.status.get_flag('Z'));
+    }
+
+    #[test]
+    fn zero_from_memory() {
+        let mut cpu = Cpu::new();
+        cpu.load_program(&[0xA6, 0x10, 0x00]);
+
+        cpu.memory.write(0x0010, 0x55);
+
+        cpu.run();
+
+        assert_eq!(cpu.registers.index_x, 0x55);
+    }
+
+    #[test]
+    fn zeroy_from_memory() {
+        let mut cpu = Cpu::new();
+        cpu.load_program(&[0xB6, 0x06]);
+
+        cpu.memory.write(0x0010, 0x55);
+        cpu.registers.index_y = 0x0A;
+
+        cpu.run();
+
+        assert_eq!(cpu.registers.index_x, 0x55);
+    }
+
+    #[test]
+    fn abs_from_memory() {
+        let mut cpu = Cpu::new();
+        cpu.load_program(&[0xAE, 0x34, 0x12]);
+
+        cpu.memory.write(0x1234, 0x55);
+
+        cpu.run();
+
+        assert_eq!(cpu.registers.index_x, 0x55);
+    }
+
+    #[test]
+    fn absy_from_memory() {
+        let mut cpu = Cpu::new();
+        cpu.load_program(&[0xBE, 0x00, 0x12]);
+
+        cpu.memory.write(0x1234, 0x55);
+        cpu.registers.index_y = 0x34;
+
+        cpu.run();
+
+        assert_eq!(cpu.registers.index_x, 0x55);
     }
 }
