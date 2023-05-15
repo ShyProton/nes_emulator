@@ -35,6 +35,7 @@ impl Cpu {
             "BRK" => return false,
             "LDA" => self.lda(&instruction.addr_mode),
             "LDX" => self.ldx(&instruction.addr_mode),
+            "LDY" => self.ldy(&instruction.addr_mode),
             "STA" => self.sta(&instruction.addr_mode),
             "TAX" => self.tax(),
             "INX" => self.inx(),

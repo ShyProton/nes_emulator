@@ -26,6 +26,12 @@ pub static INSTRUCTION_LOOKUP: phf::Map<[u8; 1], Instruction> = phf_map! {
     [0xAE] => Instruction::new("LDX", 3, 4, Absolute),
     [0xBE] => Instruction::new("LDX", 3, 4, AbsoluteY),
 
+    [0xA0] => Instruction::new("LDY", 2, 2, Immediate),
+    [0xA4] => Instruction::new("LDY", 2, 3, ZeroPage),
+    [0xB4] => Instruction::new("LDY", 2, 4, ZeroPageX),
+    [0xAC] => Instruction::new("LDY", 3, 4, Absolute),
+    [0xBC] => Instruction::new("LDY", 3, 4, AbsoluteX),
+
     [0x85] => Instruction::new("STA", 2, 3, ZeroPage),
 
     [0xAA] => Instruction::new("TAX", 1, 2, Implied),
