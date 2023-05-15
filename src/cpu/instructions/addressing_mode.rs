@@ -1,5 +1,10 @@
 use super::Cpu;
 
+use self::AddressingMode::{
+    Absolute, AbsoluteX, AbsoluteY, Immediate, Implied, IndirectX, IndirectY, ZeroPage, ZeroPageX,
+    ZeroPageY,
+};
+
 #[derive(Debug)]
 pub enum AddressingMode {
     Immediate,
@@ -17,21 +22,19 @@ pub enum AddressingMode {
 impl Cpu {
     pub fn get_operand_address(&mut self, addr_mode: &AddressingMode) -> u16 {
         let addr = match addr_mode {
-            AddressingMode::Immediate => self.registers.program_counter,
+            Immediate => self.registers.program_counter,
 
-            AddressingMode::ZeroPage => self.zero_page(0),
-            AddressingMode::ZeroPageX => self.zero_page(self.registers.index_x),
-            AddressingMode::ZeroPageY => self.zero_page(self.registers.index_y),
+            ZeroPage => self.zero_page(0),
+            ZeroPageX => self.zero_page(self.registers.index_x),
+            ZeroPageY => self.zero_page(self.registers.index_y),
 
-            AddressingMode::Absolute => self.absolute(0),
-            AddressingMode::AbsoluteX => self.absolute(self.registers.index_x),
-            AddressingMode::AbsoluteY => self.absolute(self.registers.index_y),
+            Absolute => self.absolute(0),
+            AbsoluteX => self.absolute(self.registers.index_x),
+            AbsoluteY => self.absolute(self.registers.index_y),
 
-            AddressingMode::IndirectX | AddressingMode::IndirectY => self.indirect(addr_mode),
+            IndirectX | IndirectY => self.indirect(addr_mode),
 
-            AddressingMode::Implied => {
-                panic!("mode is implied, address does not need to be looked up");
-            }
+            Implied => panic!("mode is implied, address does not need to be looked up"),
         };
 
         // Always reads at least one byte.
