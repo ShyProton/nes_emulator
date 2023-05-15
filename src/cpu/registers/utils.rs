@@ -15,3 +15,13 @@ pub enum RegisterAlias {
     Y, // Y Register
     S, // Stack Pointer
 }
+
+pub enum StatusAlias {
+    C, // Carry Flag
+    Z, // Zero Flag
+    I, // Interrupt Disable
+    D, // Decimal Mode Flag
+    B, // Break Command
+    V, // Overflow Flag
+    N, // Negative Flag
+}

@@ -15,6 +15,7 @@ mod tests {
 
     // TODO: Normal use-case test w/out overflow.
 
+    // WARN: This might not be correct.
     #[test]
     #[should_panic(expected = "attempt to add with overflow")]
     fn overflow_check() {

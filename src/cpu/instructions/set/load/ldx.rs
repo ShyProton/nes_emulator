@@ -23,7 +23,7 @@ mod tests {
 
     #[test]
     fn imm_zero_flag() {
-        immediate::z_flag_set(0xA2);
+        immediate::flag_check(0xA2);
     }
 
     #[test]
