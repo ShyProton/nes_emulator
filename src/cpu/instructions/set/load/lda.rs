@@ -32,7 +32,7 @@ mod tests {
     }
 
     #[test]
-    fn zerox_from_memory() {
+    fn zero_x_from_memory() {
         zero::x_from_memory(0xB5, &RegisterAlias::A);
     }
 
@@ -42,22 +42,22 @@ mod tests {
     }
 
     #[test]
-    fn absx_from_memory() {
+    fn abs_x_from_memory() {
         absolute::x_from_memory(0xBD, &RegisterAlias::A);
     }
 
     #[test]
-    fn absy_from_memory() {
+    fn abs_y_from_memory() {
         absolute::y_from_memory(0xB9, &RegisterAlias::A);
     }
 
     #[test]
-    fn indx_from_memory() {
+    fn ind_x_from_memory() {
         indirect::x_from_memory(0xA1, &RegisterAlias::A);
     }
 
     #[test]
-    fn indy_from_memory() {
+    fn ind_y_from_memory() {
         indirect::y_from_memory(0xB1, &RegisterAlias::A);
     }
 }

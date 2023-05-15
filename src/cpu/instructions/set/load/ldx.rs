@@ -32,7 +32,7 @@ mod tests {
     }
 
     #[test]
-    fn zeroy_from_memory() {
+    fn zero_y_from_memory() {
         zero::y_from_memory(0xB6, &RegisterAlias::X);
     }
 
@@ -42,7 +42,7 @@ mod tests {
     }
 
     #[test]
-    fn absy_from_memory() {
+    fn abs_y_from_memory() {
         absolute::y_from_memory(0xBE, &RegisterAlias::X);
     }
 }

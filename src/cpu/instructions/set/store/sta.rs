@@ -21,7 +21,7 @@ mod tests {
     }
 
     #[test]
-    fn zerox_store_mem() {
+    fn zero_x_store_mem() {
         zero::x_store_mem(0x95, &RegisterAlias::A);
     }
 
@@ -31,22 +31,22 @@ mod tests {
     }
 
     #[test]
-    fn absx_store_mem() {
+    fn abs_x_store_mem() {
         absolute::x_store_mem(0x9D, &RegisterAlias::A);
     }
 
     #[test]
-    fn absy_store_mem() {
+    fn abs_y_store_mem() {
         absolute::y_store_mem(0x99, &RegisterAlias::A);
     }
 
     #[test]
-    fn indx_store_mem() {
+    fn ind_x_store_mem() {
         indirect::x_store_mem(0x81, &RegisterAlias::A);
     }
 
     #[test]
-    fn indy_store_mem() {
+    fn ind_y_store_mem() {
         indirect::y_store_mem(0x91, &RegisterAlias::A);
     }
 }
