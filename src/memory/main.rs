@@ -5,8 +5,8 @@ pub struct Memory {
 }
 
 impl Memory {
-    pub const PRG_ROM_START: u16 = 0x8000;
     pub const PROGRAM_COUNTER_ADDRESS: u16 = 0xFFFC;
+    const PRG_ROM_START: u16 = 0x8000;
 
     pub const fn new() -> Self {
         Self {
@@ -42,6 +42,8 @@ impl Memory {
 
     pub fn load(&mut self, program: &[u8]) {
         let mem_idx = Self::PRG_ROM_START as usize;
+
+        self.memory = [0; 0xFFFF];
         self.memory[mem_idx..(mem_idx + program.len())].copy_from_slice(program);
 
         self.write_u16(Self::PROGRAM_COUNTER_ADDRESS, Self::PRG_ROM_START);

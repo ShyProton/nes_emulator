@@ -39,11 +39,90 @@ mod tests {
     #[test]
     fn zero_from_memory() {
         let mut cpu = Cpu::new();
-        cpu.memory.write(0x10, 0x55);
-
         cpu.load_program(&[0xA5, 0x10, 0x00]);
+
+        cpu.memory.write(0x0010, 0x55);
+
         cpu.run();
 
         assert_eq!(cpu.registers.accumulator, 0x55);
+    }
+
+    #[test]
+    fn zerox_from_memory() {
+        let mut cpu = Cpu::new();
+        cpu.load_program(&[0xA2, 0x0A, 0xB5, 0x06]);
+
+        cpu.memory.write(0x0010, 0x55);
+
+        cpu.run();
+
+        assert_eq!(cpu.registers.accumulator, 0x55);
+    }
+
+    #[test]
+    fn abs_from_memory() {
+        let mut cpu = Cpu::new();
+        cpu.load_program(&[0xAD, 0x34, 0x12]);
+
+        cpu.memory.write(0x1234, 0x55);
+
+        cpu.run();
+
+        assert_eq!(cpu.registers.accumulator, 0x55);
+    }
+
+    #[test]
+    fn absx_from_memory() {
+        let mut cpu = Cpu::new();
+        cpu.load_program(&[0xBD, 0x00, 0x12]);
+
+        cpu.memory.write(0x1234, 0x55);
+        cpu.registers.index_x = 0x34;
+
+        cpu.run();
+
+        assert_eq!(cpu.registers.accumulator, 0x55);
+    }
+
+    #[test]
+    fn absy_from_memory() {
+        let mut cpu = Cpu::new();
+        cpu.load_program(&[0xB9, 0x00, 0x12]);
+
+        cpu.memory.write(0x1234, 0x55);
+        cpu.registers.index_y = 0x34;
+
+        cpu.run();
+
+        assert_eq!(cpu.registers.accumulator, 0x55);
+    }
+
+    #[test]
+    fn indx_from_memory() {
+        let mut cpu = Cpu::new();
+        cpu.load_program(&[0xA1, 0x09]);
+
+        cpu.memory.write(0x0010, 0x55);
+        cpu.memory.write(0x0055, 0x69);
+        cpu.registers.index_x = 0x07;
+
+        cpu.run();
+
+        assert_eq!(cpu.registers.accumulator, 0x69);
+    }
+
+    #[test]
+    fn indy_from_memory() {
+        let mut cpu = Cpu::new();
+        cpu.load_program(&[0xB1, 0x10]);
+
+        cpu.memory.write(0x0010, 0x55);
+        cpu.memory.write(0x005A, 0x69);
+        cpu.registers.index_y = 0x05;
+
+        cpu.run();
+
+        assert_eq!(cpu.registers.accumulator, 0x69);
     }
 }
