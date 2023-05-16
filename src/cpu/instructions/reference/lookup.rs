@@ -4,7 +4,7 @@ use super::{
         ZeroPageX, ZeroPageY,
     },
     Instruction,
-    InstructionAlias::{BRK, INX, LDA, LDX, LDY, STA, STX, STY, TAX, TAY},
+    InstructionAlias::{BRK, INX, LDA, LDX, LDY, STA, STX, STY, TAX, TAY, TSX, TXA, TXS, TYA},
 };
 
 use phf::phf_map;
@@ -12,6 +12,8 @@ use phf::phf_map;
 // TODO: Implement the rest of the CPU instructions.,
 pub static INSTRUCTION_LOOKUP: phf::Map<[u8; 1], Instruction> = phf_map! {
     [0x00] => Instruction::new(BRK, 1, 7, Implied),
+
+    [0xE8] => Instruction::new(INX, 1, 2, Implied),
 
     [0xA9] => Instruction::new(LDA, 2, 2, Immediate),
     [0xA5] => Instruction::new(LDA, 2, 3, ZeroPage),
@@ -52,6 +54,8 @@ pub static INSTRUCTION_LOOKUP: phf::Map<[u8; 1], Instruction> = phf_map! {
 
     [0xAA] => Instruction::new(TAX, 1, 2, Implied),
     [0xA8] => Instruction::new(TAY, 1, 2, Implied),
-
-    [0xE8] => Instruction::new(INX, 1, 2, Implied)
+    [0xBA] => Instruction::new(TSX, 1, 2, Implied),
+    [0x8A] => Instruction::new(TXA, 1, 2, Implied),
+    [0x9A] => Instruction::new(TXS, 1, 2, Implied),
+    [0x98] => Instruction::new(TYA, 1, 2, Implied),
 };

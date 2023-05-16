@@ -14,8 +14,7 @@ impl Cpu {
     }
 
     pub fn run(&mut self) {
-        // While operating, continuously find the next opcode.
-        while self.execute_instruction() {}
+        while self.cycle() {}
     }
 
     pub fn load_program(&mut self, program: &[u8]) {
