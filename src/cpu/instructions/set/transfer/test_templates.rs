@@ -1,7 +1,7 @@
-use super::{Cpu, RegisterAlias};
+use super::{Cpu, RegisterAlias, StatusFlagAlias};
 
 pub mod implied {
-    use super::{Cpu, RegisterAlias};
+    use super::*;
 
     pub fn transfer(opcode: u8, source: &RegisterAlias, target: &RegisterAlias) {
         let mut cpu = Cpu::new();
@@ -12,8 +12,8 @@ pub mod implied {
         cpu.run();
 
         assert_eq!(*cpu.registers.by_alias(target), 0x55);
-        assert!(!cpu.registers.status.get_flag('Z'));
-        assert!(!cpu.registers.status.get_flag('N'));
+        assert!(!cpu.registers.status.get_flag(StatusFlagAlias::Z));
+        assert!(!cpu.registers.status.get_flag(StatusFlagAlias::N));
     }
 
     pub fn flag_check(opcode: u8, source: &RegisterAlias) {
@@ -23,14 +23,14 @@ pub mod implied {
         *cpu.registers.by_alias(source) = 0x00;
         cpu.run();
 
-        assert!(cpu.registers.status.get_flag('Z'));
-        assert!(!cpu.registers.status.get_flag('N'));
+        assert!(cpu.registers.status.get_flag(StatusFlagAlias::Z));
+        assert!(!cpu.registers.status.get_flag(StatusFlagAlias::N));
 
         cpu.load_program(&[opcode]);
         *cpu.registers.by_alias(source) = 0b1000_0000;
         cpu.run();
 
-        assert!(!cpu.registers.status.get_flag('Z'));
-        assert!(cpu.registers.status.get_flag('N'));
+        assert!(!cpu.registers.status.get_flag(StatusFlagAlias::Z));
+        assert!(cpu.registers.status.get_flag(StatusFlagAlias::N));
     }
 }

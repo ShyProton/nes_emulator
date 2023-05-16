@@ -1,21 +1,18 @@
-use super::RegisterByte;
+use super::{aliases::StatusFlagAlias, RegisterByte};
 
 pub struct Status {
     status: u8,
 }
 
 impl Status {
-    const FLAGS: [char; 8] = ['N', 'V', ' ', 'B', 'D', 'I', 'Z', 'C'];
-
     pub const fn new() -> Self {
         Self {
             status: 0b0000_0000,
         }
     }
 
-    pub fn set_flag(&mut self, flag: char, setting: bool) {
-        let shift = Self::flag_pos(flag);
-        let mask = 0b0000_0001 << shift;
+    pub fn set_flag(&mut self, flag: StatusFlagAlias, setting: bool) {
+        let mask = 0b0000_0001 << flag.index();
 
         if setting {
             self.status |= mask;
@@ -24,21 +21,12 @@ impl Status {
         }
     }
 
-    pub fn get_flag(&self, flag: char) -> bool {
-        let position = Self::flag_pos(flag);
-        self.status.get_nth_bit(position)
+    pub fn get_flag(&self, flag: StatusFlagAlias) -> bool {
+        self.status.get_nth_bit(flag.index())
     }
 
     pub fn reset_flags(&mut self) {
         self.status = 0b0000_0000;
-    }
-
-    fn flag_pos(flag: char) -> usize {
-        Self::FLAGS
-            .iter()
-            .rev()
-            .position(|&val| val == flag)
-            .map_or_else(|| panic!("invalid status flag"), |pos| pos)
     }
 }
 
@@ -46,11 +34,15 @@ impl Status {
 mod tests {
     use super::*;
 
+    use StatusFlagAlias::*;
+
     #[test]
     fn flag_settings() {
         let mut status = Status::new();
 
-        for flag in Status::FLAGS {
+        let aliases = [C, N, I, D, B, V, N];
+
+        for flag in aliases {
             status.reset_flags();
 
             status.set_flag(flag, true);
@@ -59,14 +51,5 @@ mod tests {
             status.set_flag(flag, false);
             assert!(!status.get_flag(flag));
         }
-    }
-
-    #[test]
-    #[should_panic(expected = "invalid status flag")]
-    fn nonexistent_flag_setting() {
-        let mut status = Status::new();
-
-        // The 'A' status flag does not exist.
-        status.set_flag('A', true);
     }
 }

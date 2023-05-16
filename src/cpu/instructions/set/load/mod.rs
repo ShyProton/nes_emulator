@@ -1,4 +1,7 @@
-use super::{AddressingMode, Cpu, RegisterAlias};
+use super::{aliases::RegisterAlias, AddressingMode, Cpu};
+
+#[cfg(test)]
+use super::aliases::StatusFlagAlias;
 
 mod lda;
 mod ldx;

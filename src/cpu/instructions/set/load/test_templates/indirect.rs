@@ -1,4 +1,4 @@
-use super::{Cpu, RegisterAlias};
+use super::*;
 
 pub fn x_from_memory(opcode: u8, target: &RegisterAlias) {
     let mut cpu = Cpu::new();

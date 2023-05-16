@@ -1,4 +1,4 @@
-use super::{Cpu, RegisterAlias};
+use super::{Cpu, RegisterAlias, StatusFlagAlias};
 
 pub mod absolute;
 pub mod immediate;

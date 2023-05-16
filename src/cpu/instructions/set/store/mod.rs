@@ -1,4 +1,4 @@
-use super::{AddressingMode, Cpu, RegisterAlias};
+use super::{aliases::RegisterAlias, AddressingMode, Cpu};
 
 mod sta;
 mod stx;

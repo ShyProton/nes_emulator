@@ -1,4 +1,4 @@
-use super::{Memory, RegisterAlias, Status};
+use super::{Memory, Status};
 
 #[cfg(test)]
 use super::RegisterByte;
@@ -32,15 +32,6 @@ impl Registers {
 
         self.program_counter = memory.read_u16(Memory::PROGRAM_COUNTER_ADDRESS);
         self.status.reset_flags();
-    }
-
-    pub fn by_alias(&mut self, alias: &RegisterAlias) -> &mut u8 {
-        match alias {
-            RegisterAlias::S => &mut self.stack_pointer,
-            RegisterAlias::A => &mut self.accumulator,
-            RegisterAlias::X => &mut self.index_x,
-            RegisterAlias::Y => &mut self.index_y,
-        }
     }
 }
 

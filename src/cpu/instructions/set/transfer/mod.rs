@@ -1,4 +1,7 @@
-use super::{Cpu, RegisterAlias};
+use super::{aliases::RegisterAlias, Cpu};
+
+#[cfg(test)]
+use super::aliases::StatusFlagAlias;
 
 mod tax;
 mod tay;
