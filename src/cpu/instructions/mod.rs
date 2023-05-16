@@ -2,7 +2,7 @@ use super::{Cpu, RegisterAlias, RegisterByte};
 
 use addressing_mode::AddressingMode;
 use main::Instruction;
-use opcodes::INSTRUCTION_LOOKUP;
+use opcodes::{InstructionAlias, INSTRUCTION_LOOKUP};
 
 mod addressing_mode;
 mod main;

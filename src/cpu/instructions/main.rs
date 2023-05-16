@@ -1,16 +1,27 @@
-use super::{AddressingMode, Cpu, INSTRUCTION_LOOKUP};
+use super::{AddressingMode, Cpu, InstructionAlias, INSTRUCTION_LOOKUP};
+
+use InstructionAlias::{
+    ADC, AND, ASL, BCC, BCS, BEQ, BIT, BMI, BNE, BPL, BRK, BVC, BVS, CLC, CLD, CLI, CLV, CMP, CPX,
+    CPY, DEC, DEX, DEY, EOR, INC, INX, INY, JMP, JSR, LDA, LDX, LDY, LSR, NOP, ORA, PHA, PHP, PLA,
+    PLP, ROL, ROR, RTI, RTS, SBC, SEC, SED, SEI, STA, STX, STY, TAX, TAY, TSX, TXA, TXS, TYA,
+};
 
 pub struct Instruction {
-    name: &'static str,
+    alias: InstructionAlias,
     bytes: u8,
     cycles: u8,
     addr_mode: AddressingMode,
 }
 
 impl Instruction {
-    pub const fn new(name: &'static str, bytes: u8, cycles: u8, addr_mode: AddressingMode) -> Self {
+    pub const fn new(
+        alias: InstructionAlias,
+        bytes: u8,
+        cycles: u8,
+        addr_mode: AddressingMode,
+    ) -> Self {
         Self {
-            name,
+            alias,
             bytes,
             cycles,
             addr_mode,
@@ -31,20 +42,103 @@ impl Cpu {
 
         self.registers.program_counter += 1;
 
-        match instruction.name {
-            "BRK" => return false,
+        match instruction.alias {
+            // Arithmetic.
+            ADC => todo!(),
+            SBC => todo!(),
 
-            "LDA" => self.lda(&instruction.addr_mode),
-            "LDX" => self.ldx(&instruction.addr_mode),
-            "LDY" => self.ldy(&instruction.addr_mode),
+            // Logical.
+            AND => todo!(),
+            EOR => todo!(),
+            ORA => todo!(),
 
-            "STA" => self.sta(&instruction.addr_mode),
-            "STX" => self.stx(&instruction.addr_mode),
-            "STY" => self.sty(&instruction.addr_mode),
+            // Bitshifting.
+            ASL => todo!(),
+            LSR => todo!(),
 
-            "TAX" => self.tax(),
-            "INX" => self.inx(),
-            _ => panic!("{} is not a valid instruction", instruction.name),
+            // Branching.
+            BCC => todo!(),
+            BCS => todo!(),
+            BEQ => todo!(),
+            BMI => todo!(),
+            BNE => todo!(),
+            BPL => todo!(),
+            BVC => todo!(),
+            BVS => todo!(),
+
+            // Bit test.
+            BIT => todo!(),
+
+            // Force break.
+            // TODO: Set B flag to 1.
+            BRK => return false,
+
+            // Flag clearing.
+            CLC => todo!(),
+            CLD => todo!(),
+            CLI => todo!(),
+            CLV => todo!(),
+
+            // Comparisons.
+            CMP => todo!(),
+            CPX => todo!(),
+            CPY => todo!(),
+
+            // Decrementing.
+            DEC => todo!(),
+            DEX => todo!(),
+            DEY => todo!(),
+
+            // Incrementing.
+            INC => todo!(),
+            INX => self.inx(),
+            INY => todo!(),
+
+            // Jumping.
+            JMP => todo!(),
+            JSR => todo!(),
+
+            // Loading.
+            LDA => self.lda(&instruction.addr_mode),
+            LDX => self.ldx(&instruction.addr_mode),
+            LDY => self.ldy(&instruction.addr_mode),
+
+            // No operation.
+            NOP => todo!(),
+
+            // Push stack.
+            PHA => todo!(),
+            PHP => todo!(),
+
+            // Pull stack.
+            PLA => todo!(),
+            PLP => todo!(),
+
+            // Rotating.
+            ROL => todo!(),
+            ROR => todo!(),
+
+            // Returning.
+            RTI => todo!(),
+            RTS => todo!(),
+
+            // Flag setting.
+            SEC => todo!(),
+            SED => todo!(),
+            SEI => todo!(),
+
+            // Storing.
+            STA => self.sta(&instruction.addr_mode),
+            STX => self.stx(&instruction.addr_mode),
+            STY => self.sty(&instruction.addr_mode),
+
+            // Transferring.
+            TAX => self.tax(),
+            TAY => self.tay(),
+            TSX => todo!(),
+            TXA => todo!(),
+            TXS => todo!(),
+            TYA => todo!(),
         }
 
         true
