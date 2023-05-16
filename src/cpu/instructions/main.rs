@@ -1,4 +1,7 @@
-use super::{AddressingMode, Cpu, InstructionAlias, INSTRUCTION_LOOKUP};
+use super::{
+    reference::{InstructionAlias, INSTRUCTION_LOOKUP},
+    AddressingMode, Cpu,
+};
 
 use InstructionAlias::{
     ADC, AND, ASL, BCC, BCS, BEQ, BIT, BMI, BNE, BPL, BRK, BVC, BVS, CLC, CLD, CLI, CLV, CMP, CPX,

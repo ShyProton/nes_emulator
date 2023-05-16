@@ -1,73 +1,13 @@
-use super::{AddressingMode, Instruction};
-
-use AddressingMode::{
-    Absolute, AbsoluteX, AbsoluteY, Immediate, Implied, IndirectX, IndirectY, ZeroPage, ZeroPageX,
-    ZeroPageY,
+use super::{
+    AddressingMode::{
+        Absolute, AbsoluteX, AbsoluteY, Immediate, Implied, IndirectX, IndirectY, ZeroPage,
+        ZeroPageX, ZeroPageY,
+    },
+    Instruction,
+    InstructionAlias::{BRK, INX, LDA, LDX, LDY, STA, STX, STY, TAX, TAY},
 };
 
-use InstructionAlias::{BRK, INX, LDA, LDX, LDY, STA, STX, STY, TAX, TAY};
-
 use phf::phf_map;
-
-#[allow(clippy::upper_case_acronyms)]
-pub enum InstructionAlias {
-    ADC,
-    AND,
-    ASL,
-    BCC,
-    BCS,
-    BEQ,
-    BIT,
-    BMI,
-    BNE,
-    BPL,
-    BRK,
-    BVC,
-    BVS,
-    CLC,
-    CLD,
-    CLI,
-    CLV,
-    CMP,
-    CPX,
-    CPY,
-    DEC,
-    DEX,
-    DEY,
-    EOR,
-    INC,
-    INX,
-    INY,
-    JMP,
-    JSR,
-    LDA,
-    LDX,
-    LDY,
-    LSR,
-    NOP,
-    ORA,
-    PHA,
-    PHP,
-    PLA,
-    PLP,
-    ROL,
-    ROR,
-    RTI,
-    RTS,
-    SBC,
-    SEC,
-    SED,
-    SEI,
-    STA,
-    STX,
-    STY,
-    TAX,
-    TAY,
-    TSX,
-    TXA,
-    TXS,
-    TYA,
-}
 
 // TODO: Implement the rest of the CPU instructions.,
 pub static INSTRUCTION_LOOKUP: phf::Map<[u8; 1], Instruction> = phf_map! {

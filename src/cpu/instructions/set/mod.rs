@@ -1,4 +1,4 @@
-use super::{AddressingMode, Cpu, RegisterAlias};
+use super::{registers::RegisterAlias, AddressingMode, Cpu};
 
 mod inx;
 mod load;

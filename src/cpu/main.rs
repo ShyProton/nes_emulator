@@ -1,4 +1,4 @@
-use super::{Memory, Registers};
+use super::{registers::Registers, Memory};
 
 pub struct Cpu {
     pub registers: Registers,

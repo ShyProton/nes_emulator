@@ -1,11 +1,10 @@
-use super::{Cpu, RegisterAlias, RegisterByte};
+use super::{registers, Cpu};
 
 use addressing_mode::AddressingMode;
 use main::Instruction;
-use opcodes::{InstructionAlias, INSTRUCTION_LOOKUP};
 
 mod addressing_mode;
 mod main;
-mod opcodes;
+mod reference;
 mod set;
 mod utils;
