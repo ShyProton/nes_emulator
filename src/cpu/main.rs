@@ -1,4 +1,7 @@
-use super::{registers::Registers, Memory};
+use super::{
+    registers::{aliases::StatusFlagAlias, Registers},
+    Memory,
+};
 
 pub struct Cpu {
     pub registers: Registers,
@@ -14,7 +17,9 @@ impl Cpu {
     }
 
     pub fn run(&mut self) {
-        while self.cycle() {}
+        while !self.registers.status.get_flag(StatusFlagAlias::B) {
+            self.cycle();
+        }
     }
 
     pub fn load_program(&mut self, program: &[u8]) {

@@ -7,7 +7,7 @@ use InstructionAlias::{
 };
 
 impl Cpu {
-    pub fn execute_instruction(&mut self, instruction: &Instruction) -> bool {
+    pub fn execute_instruction(&mut self, instruction: &Instruction) {
         match instruction.alias {
             // Arithmetic.
             ADC => todo!(),
@@ -37,7 +37,7 @@ impl Cpu {
 
             // Force break.
             // TODO: Set B flag to 1.
-            BRK => return false,
+            BRK => self.brk(),
 
             // Flag clearing.
             CLC => todo!(),
@@ -106,7 +106,5 @@ impl Cpu {
             TXS => self.txs(),
             TYA => self.tya(),
         }
-
-        true
     }
 }
