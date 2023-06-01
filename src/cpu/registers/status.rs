@@ -1,32 +1,24 @@
-use super::{aliases::StatusFlagAlias, RegisterByte};
+use super::aliases::StatusFlagAlias;
 
 pub struct Status {
-    status: u8,
+    status: [bool; 8],
 }
 
 impl Status {
     pub const fn new() -> Self {
-        Self {
-            status: 0b0000_0000,
-        }
+        Self { status: [false; 8] }
     }
 
     pub fn set_flag(&mut self, flag: StatusFlagAlias, setting: bool) {
-        let mask = 0b0000_0001 << flag.index();
-
-        if setting {
-            self.status |= mask;
-        } else {
-            self.status &= !mask;
-        }
+        self.status[flag.index()] = setting;
     }
 
-    pub fn get_flag(&self, flag: StatusFlagAlias) -> bool {
-        self.status.get_nth_bit(flag.index())
+    pub const fn get_flag(&self, flag: StatusFlagAlias) -> bool {
+        self.status[flag.index()]
     }
 
     pub fn reset_flags(&mut self) {
-        self.status = 0b0000_0000;
+        self.status = [false; 8];
     }
 }
 
@@ -34,7 +26,7 @@ impl Status {
 mod tests {
     use super::*;
 
-    use StatusFlagAlias::*;
+    use StatusFlagAlias::{B, C, D, I, N, V};
 
     #[test]
     fn flag_settings() {

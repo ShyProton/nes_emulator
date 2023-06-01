@@ -27,9 +27,6 @@ impl Instruction {
 }
 
 impl Cpu {
-    /// Executes the next CPU instruction as defined in the memory.
-    /// Only returns false if the instruction is to halt the program.
-    // TODO: Remove bool return, since we'll be checking the B flag for breaks.
     pub fn cycle(&mut self) {
         let opcode = self.memory.read(self.registers.program_counter);
 
