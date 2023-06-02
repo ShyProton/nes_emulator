@@ -51,9 +51,9 @@ impl Cpu {
             CPY => todo!(),
 
             // Decrementing.
-            DEC => todo!(),
-            DEX => todo!(),
-            DEY => todo!(),
+            DEC => self.dec(&instruction.addr_mode),
+            DEX => self.dex(),
+            DEY => self.dey(),
 
             // Incrementing.
             INC => self.inc(&instruction.addr_mode),

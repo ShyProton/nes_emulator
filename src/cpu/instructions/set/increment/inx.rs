@@ -15,13 +15,15 @@ impl Cpu {
 mod tests {
     use super::{immediate, CrementMode, RegisterAlias};
 
+    const CREMENT_MODE: CrementMode = CrementMode::Increment;
+
     #[test]
     fn overflow() {
-        immediate::wrapping(0xE8, &RegisterAlias::X, &CrementMode::Increment);
+        immediate::wrapping(0xE8, &RegisterAlias::X, &CREMENT_MODE);
     }
 
     #[test]
     fn increment() {
-        immediate::crement(0xE8, &RegisterAlias::X, &CrementMode::Increment);
+        immediate::crement(0xE8, &RegisterAlias::X, &CREMENT_MODE);
     }
 }
