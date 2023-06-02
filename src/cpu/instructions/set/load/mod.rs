@@ -15,9 +15,10 @@ impl Cpu {
     /// Loads a byte of memory into some specified register, setting the zero and negative flags as
     /// appropriate.
     fn load(&mut self, addr_mode: &AddressingMode, target: &RegisterAlias) {
-        let value = self.get_value(addr_mode);
+        let addr = self.get_operand_address(addr_mode);
+        let result = self.memory.read(addr);
 
-        self.registers.set_register(target, value);
-        self.update_zero_and_negative_flags(value);
+        self.registers.set_register(target, result);
+        self.update_zero_and_negative_flags(result);
     }
 }

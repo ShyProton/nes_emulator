@@ -1,6 +1,6 @@
 use super::{
     registers::{aliases::StatusFlagAlias, RegisterByte},
-    AddressingMode, Cpu,
+    Cpu,
 };
 
 impl Cpu {
@@ -9,10 +9,5 @@ impl Cpu {
             .status
             .set_flag(StatusFlagAlias::Z, result == 0)
             .set_flag(StatusFlagAlias::N, result.get_nth_bit(7));
-    }
-
-    pub fn get_value(&mut self, addr_mode: &AddressingMode) -> u8 {
-        let addr = self.get_operand_address(addr_mode);
-        self.memory.read(addr)
     }
 }
