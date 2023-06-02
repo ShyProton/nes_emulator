@@ -8,6 +8,25 @@ pub enum RegisterAlias {
 }
 
 impl Registers {
+    pub fn set_register(&mut self, alias: &RegisterAlias, value: u8) {
+        match alias {
+            RegisterAlias::A => self.accumulator = value,
+            RegisterAlias::X => self.index_x = value,
+            RegisterAlias::Y => self.index_y = value,
+            RegisterAlias::S => self.stack_pointer = value,
+        }
+    }
+
+    pub fn get_register(&mut self, alias: &RegisterAlias) -> u8 {
+        match alias {
+            RegisterAlias::A => self.accumulator,
+            RegisterAlias::X => self.index_x,
+            RegisterAlias::Y => self.index_y,
+            RegisterAlias::S => self.stack_pointer,
+        }
+    }
+
+    // TODO: Use the above getters and setters instead of this by_alias method.
     pub fn by_alias(&mut self, alias: &RegisterAlias) -> &mut u8 {
         match alias {
             RegisterAlias::S => &mut self.stack_pointer,

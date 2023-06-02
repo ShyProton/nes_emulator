@@ -36,7 +36,6 @@ impl Cpu {
             BIT => todo!(),
 
             // Force break.
-            // TODO: Set B flag to 1.
             BRK => self.brk(),
 
             // Flag clearing.
@@ -70,7 +69,7 @@ impl Cpu {
             LDY => self.ldy(&instruction.addr_mode),
 
             // No operation.
-            NOP => todo!(),
+            NOP => {}
 
             // Push stack.
             PHA => todo!(),

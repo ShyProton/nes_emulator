@@ -10,6 +10,7 @@ mod iny;
 #[cfg(test)]
 mod test_templates;
 
+#[allow(clippy::module_name_repetitions)]
 pub enum CrementMode {
     Increment,
     Decrement,
