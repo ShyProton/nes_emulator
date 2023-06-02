@@ -9,8 +9,9 @@ impl Status {
         Self { status: [false; 8] }
     }
 
-    pub fn set_flag(&mut self, flag: StatusFlagAlias, setting: bool) {
+    pub fn set_flag(&mut self, flag: StatusFlagAlias, setting: bool) -> &mut Self {
         self.status[flag.index()] = setting;
+        self
     }
 
     pub const fn get_flag(&self, flag: StatusFlagAlias) -> bool {

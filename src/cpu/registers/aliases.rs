@@ -8,13 +8,15 @@ pub enum RegisterAlias {
 }
 
 impl Registers {
-    pub fn set_register(&mut self, alias: &RegisterAlias, value: u8) {
+    pub fn set_register(&mut self, alias: &RegisterAlias, value: u8) -> &mut Self {
         match alias {
             RegisterAlias::A => self.accumulator = value,
             RegisterAlias::X => self.index_x = value,
             RegisterAlias::Y => self.index_y = value,
             RegisterAlias::S => self.stack_pointer = value,
         }
+
+        self
     }
 
     pub fn get_register(&mut self, alias: &RegisterAlias) -> u8 {

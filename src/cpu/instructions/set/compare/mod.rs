@@ -1,3 +1,5 @@
+use std::cmp::Ordering;
+
 use super::{
     aliases::{RegisterAlias, StatusFlagAlias},
     AddressingMode, Cpu,
@@ -17,7 +19,11 @@ impl Cpu {
 
         let comparison = self.memory.read(addr).cmp(&register_value);
 
-        // TODO: Finish after refactoring register getting/setting.
-        // self.registers.status.set_flag(StatusFlagAlias::C, true);
+        self.update_zero_and_negative_flags(register_value);
+
+        self.registers
+            .status
+            .set_flag(StatusFlagAlias::C, comparison != Ordering::Less)
+            .set_flag(StatusFlagAlias::Z, comparison == Ordering::Equal);
     }
 }
