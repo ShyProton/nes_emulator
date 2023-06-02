@@ -1,4 +1,4 @@
-use super::{Cpu, RegisterAlias};
+use super::{Cpu, CrementMode, RegisterAlias};
 
 #[cfg(test)]
 use super::test_templates::immediate;
@@ -7,21 +7,21 @@ impl Cpu {
     /// INX - Increment the X Register.
     /// Adds one to the X register setting the zero and negative flags as appropriate.
     pub fn inx(&mut self) {
-        self.increment(&RegisterAlias::X);
+        self.crement_register(&RegisterAlias::X, &CrementMode::Increment);
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use super::{immediate, RegisterAlias};
+    use super::{immediate, CrementMode, RegisterAlias};
 
     #[test]
-    fn increment() {
-        immediate::increment(0xE8, &RegisterAlias::X);
+    fn overflow() {
+        immediate::wrapping(0xE8, &RegisterAlias::X, &CrementMode::Increment);
     }
 
     #[test]
-    fn overflow_check() {
-        immediate::overflow(0xE8, &RegisterAlias::X);
+    fn increment() {
+        immediate::crement(0xE8, &RegisterAlias::X, &CrementMode::Increment);
     }
 }
