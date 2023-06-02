@@ -15,18 +15,20 @@ impl Cpu {
 mod tests {
     use super::{absolute, zero, RegisterAlias};
 
+    const REGISTER_ALIAS: RegisterAlias = RegisterAlias::Y;
+
     #[test]
     fn zero_store_mem() {
-        zero::store_mem(0x84, &RegisterAlias::Y);
+        zero::store_mem(0x84, &REGISTER_ALIAS);
     }
 
     #[test]
     fn zero_x_store_mem() {
-        zero::x_store_mem(0x94, &RegisterAlias::Y);
+        zero::x_store_mem(0x94, &REGISTER_ALIAS);
     }
 
     #[test]
     fn abs_store_mem() {
-        absolute::store_mem(0x8C, &RegisterAlias::Y);
+        absolute::store_mem(0x8C, &REGISTER_ALIAS);
     }
 }

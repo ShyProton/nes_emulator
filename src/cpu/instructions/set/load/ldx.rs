@@ -16,9 +16,11 @@ impl Cpu {
 mod tests {
     use super::{absolute, immediate, zero, RegisterAlias};
 
+    const REGISTER_ALIAS: RegisterAlias = RegisterAlias::X;
+
     #[test]
     fn imm_load_data() {
-        immediate::load_data(0xA2, &RegisterAlias::X);
+        immediate::load_data(0xA2, &REGISTER_ALIAS);
     }
 
     #[test]
@@ -28,21 +30,21 @@ mod tests {
 
     #[test]
     fn zero_from_memory() {
-        zero::from_memory(0xA6, &RegisterAlias::X);
+        zero::from_memory(0xA6, &REGISTER_ALIAS);
     }
 
     #[test]
     fn zero_y_from_memory() {
-        zero::y_from_memory(0xB6, &RegisterAlias::X);
+        zero::y_from_memory(0xB6, &REGISTER_ALIAS);
     }
 
     #[test]
     fn abs_from_memory() {
-        absolute::from_memory(0xAE, &RegisterAlias::X);
+        absolute::from_memory(0xAE, &REGISTER_ALIAS);
     }
 
     #[test]
     fn abs_y_from_memory() {
-        absolute::y_from_memory(0xBE, &RegisterAlias::X);
+        absolute::y_from_memory(0xBE, &REGISTER_ALIAS);
     }
 }
