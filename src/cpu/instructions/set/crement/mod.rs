@@ -25,9 +25,8 @@ impl Cpu {
             CrementMode::Decrement => self.registers.get_register(target).wrapping_sub(1),
         };
 
-        self.update_zero_and_negative_flags(result);
-
         self.registers.set_register(target, result);
+        self.update_zero_and_negative_flags(result);
     }
 
     /// (IN/DE)C - *crement Memory.
@@ -41,7 +40,7 @@ impl Cpu {
             CrementMode::Decrement => self.memory.read(addr).wrapping_sub(1),
         };
 
-        self.update_zero_and_negative_flags(result);
         self.memory.write(addr, result);
+        self.update_zero_and_negative_flags(result);
     }
 }

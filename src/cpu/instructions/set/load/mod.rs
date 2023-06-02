@@ -16,8 +16,8 @@ impl Cpu {
     /// appropriate.
     fn load(&mut self, addr_mode: &AddressingMode, target: &RegisterAlias) {
         let value = self.get_value(addr_mode);
-        self.update_zero_and_negative_flags(value);
 
         self.registers.set_register(target, value);
+        self.update_zero_and_negative_flags(value);
     }
 }
