@@ -40,10 +40,10 @@ impl Cpu {
             BRK => self.brk(),
 
             // Flag clearing.
-            CLC => todo!(),
-            CLD => todo!(),
-            CLI => todo!(),
-            CLV => todo!(),
+            CLC => self.clc(),
+            CLD => self.cld(),
+            CLI => self.cli(),
+            CLV => self.clv(),
 
             // Comparisons.
             CMP => todo!(),
@@ -89,9 +89,9 @@ impl Cpu {
             RTS => todo!(),
 
             // Flag setting.
-            SEC => todo!(),
-            SED => todo!(),
-            SEI => todo!(),
+            SEC => self.sec(),
+            SED => self.sed(),
+            SEI => self.sei(),
 
             // Storing.
             STA => self.sta(&instruction.addr_mode),
