@@ -56,9 +56,9 @@ impl Cpu {
             DEY => todo!(),
 
             // Incrementing.
-            INC => todo!(),
+            INC => self.inc(&instruction.addr_mode),
             INX => self.inx(),
-            INY => todo!(),
+            INY => self.iny(),
 
             // Jumping.
             JMP => todo!(),

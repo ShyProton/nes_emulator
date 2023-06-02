@@ -4,7 +4,9 @@ use super::{
         ZeroPageX, ZeroPageY,
     },
     Instruction,
-    InstructionAlias::{BRK, INX, LDA, LDX, LDY, STA, STX, STY, TAX, TAY, TSX, TXA, TXS, TYA},
+    InstructionAlias::{
+        BRK, INC, INX, INY, LDA, LDX, LDY, STA, STX, STY, TAX, TAY, TSX, TXA, TXS, TYA,
+    },
 };
 
 use phf::phf_map;
@@ -13,7 +15,14 @@ use phf::phf_map;
 pub static INSTRUCTION_LOOKUP: phf::Map<[u8; 1], Instruction> = phf_map! {
     [0x00] => Instruction::new(BRK, 1, 7, Implied),
 
+    [0xE6] => Instruction::new(INC, 2, 5, ZeroPage),
+    [0xF6] => Instruction::new(INC, 2, 5, ZeroPageX),
+    [0xEE] => Instruction::new(INC, 2, 5, Absolute),
+    [0xFE] => Instruction::new(INC, 2, 5, AbsoluteX),
+
     [0xE8] => Instruction::new(INX, 1, 2, Implied),
+
+    [0xC8] => Instruction::new(INY, 1, 2, Implied),
 
     [0xA9] => Instruction::new(LDA, 2, 2, Immediate),
     [0xA5] => Instruction::new(LDA, 2, 3, ZeroPage),
