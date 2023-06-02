@@ -1,7 +1,7 @@
 use super::{registers::aliases, AddressingMode, Cpu};
 
 mod brk;
-mod increment;
+mod crement;
 mod load;
 mod store;
 mod transfer;

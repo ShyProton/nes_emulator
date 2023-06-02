@@ -15,15 +15,16 @@ impl Cpu {
 mod tests {
     use super::{immediate, CrementMode, RegisterAlias};
 
+    const REGISTER_ALIAS: RegisterAlias = RegisterAlias::X;
     const CREMENT_MODE: CrementMode = CrementMode::Decrement;
 
     #[test]
     fn underflow() {
-        immediate::wrapping(0xCA, &RegisterAlias::X, &CREMENT_MODE);
+        immediate::wrapping(0xCA, &REGISTER_ALIAS, &CREMENT_MODE);
     }
 
     #[test]
     fn decrement() {
-        immediate::crement(0xCA, &RegisterAlias::X, &CREMENT_MODE);
+        immediate::crement(0xCA, &REGISTER_ALIAS, &CREMENT_MODE);
     }
 }
