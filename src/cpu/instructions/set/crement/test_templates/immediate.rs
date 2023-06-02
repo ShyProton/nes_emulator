@@ -9,11 +9,11 @@ pub fn wrapping(opcode: u8, target: &RegisterAlias, crement_mode: &CrementMode) 
     };
 
     cpu.load_program(&[opcode]);
-    *cpu.registers.by_alias(target) = initial;
+    cpu.registers.set_register(target, initial);
 
     cpu.run();
 
-    assert_eq!(*cpu.registers.by_alias(target), expected);
+    assert_eq!(cpu.registers.get_register(target), expected);
 }
 
 pub fn crement(opcode: u8, target: &RegisterAlias, crement_mode: &CrementMode) {
@@ -26,9 +26,9 @@ pub fn crement(opcode: u8, target: &RegisterAlias, crement_mode: &CrementMode) {
     };
 
     cpu.load_program(&[opcode]);
-    *cpu.registers.by_alias(target) = initial;
+    cpu.registers.set_register(target, initial);
 
     cpu.run();
 
-    assert_eq!(*cpu.registers.by_alias(target), expected);
+    assert_eq!(cpu.registers.get_register(target), expected);
 }

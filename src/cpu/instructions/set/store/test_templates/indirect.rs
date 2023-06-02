@@ -5,7 +5,7 @@ pub fn x_store_mem(opcode: u8, source: &RegisterAlias) {
     cpu.load_program(&[opcode, 0x30]);
 
     cpu.registers.index_x = 0x04;
-    *cpu.registers.by_alias(source) = 0x55;
+    cpu.registers.set_register(source, 0x55);
     cpu.memory.write(0x0034, 0x0069);
 
     cpu.run();
@@ -18,7 +18,7 @@ pub fn y_store_mem(opcode: u8, source: &RegisterAlias) {
     cpu.load_program(&[opcode, 0x34]);
 
     cpu.registers.index_y = 0x60;
-    *cpu.registers.by_alias(source) = 0x55;
+    cpu.registers.set_register(source, 0x55);
     cpu.memory.write(0x0034, 0x09);
 
     cpu.run();

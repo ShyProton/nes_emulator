@@ -8,7 +8,7 @@ pub fn from_memory(opcode: u8, target: &RegisterAlias) {
 
     cpu.run();
 
-    assert_eq!(*cpu.registers.by_alias(target), 0x55);
+    assert_eq!(cpu.registers.get_register(target), 0x55);
 }
 
 pub fn x_from_memory(opcode: u8, target: &RegisterAlias) {
@@ -20,7 +20,7 @@ pub fn x_from_memory(opcode: u8, target: &RegisterAlias) {
 
     cpu.run();
 
-    assert_eq!(*cpu.registers.by_alias(target), 0x55);
+    assert_eq!(cpu.registers.get_register(target), 0x55);
 }
 
 pub fn y_from_memory(opcode: u8, target: &RegisterAlias) {
@@ -32,5 +32,5 @@ pub fn y_from_memory(opcode: u8, target: &RegisterAlias) {
 
     cpu.run();
 
-    assert_eq!(*cpu.registers.by_alias(target), 0x55);
+    assert_eq!(cpu.registers.get_register(target), 0x55);
 }

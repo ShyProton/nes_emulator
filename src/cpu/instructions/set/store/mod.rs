@@ -12,6 +12,6 @@ impl Cpu {
     /// Stores the contents of a specified register into memory.
     fn store(&mut self, addr_mode: &AddressingMode, source: &RegisterAlias) {
         let addr = self.get_operand_address(addr_mode);
-        self.memory.write(addr, *self.registers.by_alias(source));
+        self.memory.write(addr, self.registers.get_register(source));
     }
 }

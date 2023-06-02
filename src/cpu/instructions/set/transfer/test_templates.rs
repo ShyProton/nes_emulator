@@ -7,11 +7,11 @@ pub mod implied {
         let mut cpu = Cpu::new();
         cpu.load_program(&[opcode]);
 
-        *cpu.registers.by_alias(source) = 0x55;
+        cpu.registers.set_register(source, 0x55);
 
         cpu.run();
 
-        assert_eq!(*cpu.registers.by_alias(target), 0x55);
+        assert_eq!(cpu.registers.get_register(target), 0x55);
         assert!(!cpu.registers.status.get_flag(StatusFlagAlias::Z));
         assert!(!cpu.registers.status.get_flag(StatusFlagAlias::N));
     }
@@ -20,14 +20,14 @@ pub mod implied {
         let mut cpu = Cpu::new();
 
         cpu.load_program(&[opcode]);
-        *cpu.registers.by_alias(source) = 0x00;
+        cpu.registers.set_register(source, 0x00);
         cpu.run();
 
         assert!(cpu.registers.status.get_flag(StatusFlagAlias::Z));
         assert!(!cpu.registers.status.get_flag(StatusFlagAlias::N));
 
         cpu.load_program(&[opcode]);
-        *cpu.registers.by_alias(source) = 0b1000_0000;
+        cpu.registers.set_register(source, 0b1000_0000);
         cpu.run();
 
         assert!(!cpu.registers.status.get_flag(StatusFlagAlias::Z));

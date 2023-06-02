@@ -25,16 +25,6 @@ impl Registers {
             RegisterAlias::S => self.stack_pointer,
         }
     }
-
-    // TODO: Use the above getters and setters instead of this by_alias method.
-    pub fn by_alias(&mut self, alias: &RegisterAlias) -> &mut u8 {
-        match alias {
-            RegisterAlias::S => &mut self.stack_pointer,
-            RegisterAlias::A => &mut self.accumulator,
-            RegisterAlias::X => &mut self.index_x,
-            RegisterAlias::Y => &mut self.index_y,
-        }
-    }
 }
 
 #[derive(Copy, Clone)]

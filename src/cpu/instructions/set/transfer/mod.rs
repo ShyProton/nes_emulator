@@ -18,9 +18,9 @@ impl Cpu {
     /// Copies the current contents of a specified register into another specified register, setting
     /// the zero and negative flags as appropriate.
     fn transfer(&mut self, source: &RegisterAlias, target: &RegisterAlias) {
-        let source = *self.registers.by_alias(source);
+        let source = self.registers.get_register(source);
 
-        *self.registers.by_alias(target) = source;
+        self.registers.set_register(target, source);
         self.update_zero_and_negative_flags(source);
     }
 }

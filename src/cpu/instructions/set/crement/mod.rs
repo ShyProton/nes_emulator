@@ -21,13 +21,13 @@ impl Cpu {
     /// Adds/subtracts one to some specified register setting the zero and negative flags as appropriate.
     pub fn crement_register(&mut self, target: &RegisterAlias, crement_mode: &CrementMode) {
         let result = match crement_mode {
-            CrementMode::Increment => self.registers.by_alias(target).wrapping_add(1),
-            CrementMode::Decrement => self.registers.by_alias(target).wrapping_sub(1),
+            CrementMode::Increment => self.registers.get_register(target).wrapping_add(1),
+            CrementMode::Decrement => self.registers.get_register(target).wrapping_sub(1),
         };
 
         self.update_zero_and_negative_flags(result);
 
-        *self.registers.by_alias(target) = result;
+        self.registers.set_register(target, result);
     }
 
     /// (IN/DE)C - *crement Memory.

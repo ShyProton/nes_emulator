@@ -13,9 +13,9 @@ impl Cpu {
     /// and sets the zero and carry flags as appropriate.
     pub fn compare(&mut self, target: &RegisterAlias, addr_mode: &AddressingMode) {
         let addr = self.get_operand_address(addr_mode);
-        let register_value = self.registers.by_alias(target);
+        let register_value = self.registers.get_register(target);
 
-        let comparison = self.memory.read(addr).cmp(register_value);
+        let comparison = self.memory.read(addr).cmp(&register_value);
 
         // TODO: Finish after refactoring register getting/setting.
         // self.registers.status.set_flag(StatusFlagAlias::C, true);

@@ -5,7 +5,7 @@ pub fn load_data(opcode: u8, target: &RegisterAlias) {
     cpu.load_program(&[opcode, 0x55]);
     cpu.run();
 
-    assert_eq!(*cpu.registers.by_alias(target), 0x55);
+    assert_eq!(cpu.registers.get_register(target), 0x55);
     assert!(!cpu.registers.status.get_flag(StatusFlagAlias::Z));
     assert!(!cpu.registers.status.get_flag(StatusFlagAlias::N));
 }
