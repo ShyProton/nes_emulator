@@ -16,7 +16,7 @@ pub fn x_from_memory(opcode: u8, target: &RegisterAlias) {
     cpu.load_program(&[opcode, 0x06]);
 
     cpu.memory.write(0x0010, 0x55);
-    cpu.registers.index_x = 0x0A;
+    cpu.registers.set_register(&RegisterAlias::X, 0x0A);
 
     cpu.run();
 
@@ -28,7 +28,7 @@ pub fn y_from_memory(opcode: u8, target: &RegisterAlias) {
     cpu.load_program(&[opcode, 0x06]);
 
     cpu.memory.write(0x0010, 0x55);
-    cpu.registers.index_y = 0x0A;
+    cpu.registers.set_register(&RegisterAlias::Y, 0x0A);
 
     cpu.run();
 

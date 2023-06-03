@@ -27,7 +27,7 @@ pub fn x_crement_mem(opcode: u8, crement_mode: &CrementMode) {
     };
 
     cpu.load_program(&[opcode, 0x40, 0x69]);
-    cpu.registers.index_x = 2;
+    cpu.registers.set_register(&RegisterAlias::X, 0x02);
     cpu.memory.write(0x6942, initial);
 
     cpu.run();
