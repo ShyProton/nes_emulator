@@ -9,6 +9,6 @@ pub mod implied {
         cpu.load_program(&[opcode]);
         cpu.run();
 
-        assert!(cpu.registers.status.get_flag(flag) == setting);
+        assert_eq!(cpu.registers.status.get_flag(flag), setting);
     }
 }
