@@ -45,9 +45,9 @@ impl Cpu {
             CLV => self.clv(),
 
             // Comparisons.
-            CMP => todo!(),
-            CPX => todo!(),
-            CPY => todo!(),
+            CMP => self.cmp(&instruction.addr_mode),
+            CPX => self.cpx(&instruction.addr_mode),
+            CPY => self.cpy(&instruction.addr_mode),
 
             // Decrementing.
             DEC => self.dec(&instruction.addr_mode),

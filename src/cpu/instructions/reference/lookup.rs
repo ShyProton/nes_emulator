@@ -68,7 +68,7 @@ pub static INSTRUCTION_LOOKUP: phf::Map<[u8; 1], Instruction> = phf_map! {
 
     [0xB8] => Instruction::new(CLV, 1, 2, Implied),
 
-    [0xC9] => Instruction::new(CMP, 2, 2, Implied),
+    [0xC9] => Instruction::new(CMP, 2, 2, Immediate),
     [0xC5] => Instruction::new(CMP, 2, 3, ZeroPage),
     [0xD5] => Instruction::new(CMP, 2, 4, ZeroPageX),
     [0xCD] => Instruction::new(CMP, 3, 4, Absolute),
