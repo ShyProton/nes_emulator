@@ -1,10 +1,10 @@
 use super::*;
 
-fn base_compare(opcode: u8, target: &RegisterAlias, mode_register: &RegisterAlias, difference: u8) {
+fn base_compare(opcode: u8, target: &RegisterAlias, mode_register: &RegisterAlias, diff: u8) {
     let load_data_and_run = |cpu: &mut Cpu, register_val, memory_val| {
-        cpu.load_program(&[opcode, 0x42 - difference, 0x69]);
+        cpu.load_program(&[opcode, 0x42 - diff, 0x69]);
 
-        cpu.registers.set_register(mode_register, difference);
+        cpu.registers.set_register(mode_register, diff);
         cpu.registers.set_register(target, register_val);
         cpu.memory.write(0x6942, memory_val);
 
@@ -38,9 +38,9 @@ pub fn compare(opcode: u8, target: &RegisterAlias) {
 }
 
 pub fn x_compare(opcode: u8, target: &RegisterAlias) {
-    base_compare(opcode, target, &RegisterAlias::X, 0x02);
+    base_compare(opcode, target, &RegisterAlias::X, 0x0A);
 }
 
 pub fn y_compare(opcode: u8, target: &RegisterAlias) {
-    base_compare(opcode, target, &RegisterAlias::Y, 0x02);
+    base_compare(opcode, target, &RegisterAlias::Y, 0x0A);
 }
