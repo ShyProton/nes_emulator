@@ -3,6 +3,7 @@ use super::{
     AddressingMode, Cpu,
 };
 
+#[allow(dead_code)]
 pub struct Instruction {
     pub alias: InstructionAlias,
     bytes: u8,
