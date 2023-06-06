@@ -1,4 +1,4 @@
-use super::{AddressingMode, Cpu, Operation};
+use super::{AddressingMode, Cpu, LogicalOperation};
 
 #[cfg(test)]
 use super::test_templates;
@@ -8,7 +8,7 @@ impl Cpu {
     /// A logical AND is performed, bit by bit, on the accumulator contents using the contents of
     /// a byte of memory.
     pub fn and(&mut self, addr_mode: &AddressingMode) {
-        self.logical(addr_mode, &Operation::And);
+        self.logical(addr_mode, &LogicalOperation::And);
     }
 }
 
@@ -16,10 +16,10 @@ impl Cpu {
 mod tests {
     use super::{
         test_templates::{absolute, immediate, indirect, zero},
-        Operation,
+        LogicalOperation,
     };
 
-    const OPERATION: Operation = Operation::And;
+    const OPERATION: LogicalOperation = LogicalOperation::And;
 
     #[test]
     fn imm_and() {

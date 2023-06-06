@@ -1,6 +1,6 @@
 use super::*;
 
-pub fn logical(opcode: u8, logical_op: &Operation) {
+pub fn logical(opcode: u8, logical_op: &LogicalOperation) {
     let mut cpu = Cpu::new();
 
     let mut value = 0b1010_1010;

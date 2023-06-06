@@ -1,6 +1,6 @@
 use super::*;
 
-pub fn x_logical(opcode: u8, logical_op: &Operation) {
+pub fn x_logical(opcode: u8, logical_op: &LogicalOperation) {
     let mut cpu = Cpu::new();
 
     let mut value = 0b1010_1010;
@@ -20,7 +20,7 @@ pub fn x_logical(opcode: u8, logical_op: &Operation) {
     assert_eq!(cpu.registers.accumulator, value);
 }
 
-pub fn y_logical(opcode: u8, logical_op: &Operation) {
+pub fn y_logical(opcode: u8, logical_op: &LogicalOperation) {
     let mut cpu = Cpu::new();
 
     let mut value = 0b1010_1010;

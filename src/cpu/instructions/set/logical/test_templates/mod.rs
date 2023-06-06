@@ -1,4 +1,4 @@
-use super::{perform_logical_operation, Cpu, Operation, RegisterAlias};
+use super::{perform_logical_operation, Cpu, LogicalOperation, RegisterAlias};
 
 pub mod absolute;
 pub mod immediate;

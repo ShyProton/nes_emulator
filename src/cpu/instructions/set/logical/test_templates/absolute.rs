@@ -1,6 +1,11 @@
 use super::*;
 
-fn base_logical(opcode: u8, logical_op: &Operation, mode_register: &RegisterAlias, diff: u8) {
+fn base_logical(
+    opcode: u8,
+    logical_op: &LogicalOperation,
+    mode_register: &RegisterAlias,
+    diff: u8,
+) {
     let mut cpu = Cpu::new();
 
     let mut value = 0b1010_1010;
@@ -18,15 +23,15 @@ fn base_logical(opcode: u8, logical_op: &Operation, mode_register: &RegisterAlia
     assert_eq!(cpu.registers.accumulator, value);
 }
 
-pub fn logical(opcode: u8, logical_op: &Operation) {
+pub fn logical(opcode: u8, logical_op: &LogicalOperation) {
     // NOTE: Difference of 0 causes the addressing mode's register to be ignored.
     base_logical(opcode, logical_op, &RegisterAlias::X, 0x00);
 }
 
-pub fn x_logical(opcode: u8, logical_op: &Operation) {
+pub fn x_logical(opcode: u8, logical_op: &LogicalOperation) {
     base_logical(opcode, logical_op, &RegisterAlias::X, 0x0A);
 }
 
-pub fn y_logical(opcode: u8, logical_op: &Operation) {
+pub fn y_logical(opcode: u8, logical_op: &LogicalOperation) {
     base_logical(opcode, logical_op, &RegisterAlias::Y, 0x0A);
 }
