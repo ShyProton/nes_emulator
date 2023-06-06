@@ -4,7 +4,7 @@ fn base_compare(opcode: u8, target: &RegisterAlias, diff: u8) {
     let load_data_and_run = |cpu: &mut Cpu, register_val, memory_val| {
         cpu.load_program(&[opcode, 0x69 - diff]);
 
-        cpu.registers.set_register(&RegisterAlias::X, diff);
+        cpu.registers.index_x = diff;
         cpu.registers.set_register(target, register_val);
         cpu.memory.write(0x0069, memory_val);
 

@@ -11,7 +11,7 @@ fn base_crement(opcode: u8, crement_mode: &CrementMode, diff: u8) {
 
     cpu.load_program(&[opcode, 0x69 - diff]);
 
-    cpu.registers.set_register(&RegisterAlias::X, diff);
+    cpu.registers.index_x = diff;
     cpu.memory.write(0x0069, initial);
 
     cpu.run();

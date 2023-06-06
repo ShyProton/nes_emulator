@@ -4,7 +4,7 @@ pub fn x_compare(opcode: u8, target: &RegisterAlias) {
     let load_data_and_run = |cpu: &mut Cpu, register_val, memory_val| {
         cpu.load_program(&[opcode, 0x40]);
 
-        cpu.registers.set_register(&RegisterAlias::X, 0x02);
+        cpu.registers.index_x = 0x02;
         cpu.registers.set_register(target, register_val);
 
         cpu.memory.write(0x0042, 0x69);
@@ -38,7 +38,7 @@ pub fn y_compare(opcode: u8, target: &RegisterAlias) {
     let load_data_and_run = |cpu: &mut Cpu, register_val, memory_val| {
         cpu.load_program(&[opcode, 0x42]);
 
-        cpu.registers.set_register(&RegisterAlias::Y, 0x09);
+        cpu.registers.index_y = 0x09;
         cpu.registers.set_register(target, register_val);
 
         cpu.memory.write(0x0042, 0x60);

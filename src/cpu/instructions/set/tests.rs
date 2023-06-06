@@ -1,5 +1,3 @@
-use super::aliases::RegisterAlias;
-
 #[test]
 fn conglomerate_1() {
     use super::Cpu;
@@ -8,5 +6,5 @@ fn conglomerate_1() {
     cpu.load_program(&[0xA9, 0xC0, 0xAA, 0xE8, 0x00]);
     cpu.run();
 
-    assert_eq!(cpu.registers.get_register(&RegisterAlias::X), 0xC1);
+    assert_eq!(cpu.registers.index_x, 0xC1);
 }
