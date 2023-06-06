@@ -6,6 +6,7 @@ mod crement;
 mod flags;
 mod load;
 mod logical;
+mod stack;
 mod store;
 mod transfer;
 

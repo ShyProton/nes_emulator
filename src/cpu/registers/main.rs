@@ -25,7 +25,7 @@ impl Registers {
     }
 
     pub fn reset(&mut self, memory: &Memory) {
-        self.stack_pointer = 0x00;
+        self.stack_pointer = 0xFF;
         self.accumulator = 0x00;
         self.index_x = 0x00;
         self.index_y = 0x00;

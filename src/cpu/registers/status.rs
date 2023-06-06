@@ -18,6 +18,24 @@ impl Status {
         self.status[flag.index()]
     }
 
+    pub fn set_byte(&mut self, byte: u8) {
+        for i in 0..8 {
+            self.status[i] = (byte & (0b0000_0001 << i)) != 0;
+        }
+    }
+
+    pub fn get_byte(&self) -> u8 {
+        let mut byte = 0;
+
+        for (i, &bit) in self.status.iter().enumerate() {
+            if bit {
+                byte |= 0b0000_0001 << i;
+            }
+        }
+
+        byte
+    }
+
     pub fn reset_flags(&mut self) {
         self.status = [false; 8];
     }

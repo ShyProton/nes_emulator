@@ -6,6 +6,7 @@ pub enum RegisterAlias {
     X, // X Register
     Y, // Y Register
     S, // Stack Pointer
+    P, // Processor status
 }
 
 impl Registers {
@@ -15,6 +16,7 @@ impl Registers {
             RegisterAlias::X => self.index_x = value,
             RegisterAlias::Y => self.index_y = value,
             RegisterAlias::S => self.stack_pointer = value,
+            RegisterAlias::P => self.status.set_byte(value),
         }
 
         self
@@ -26,6 +28,7 @@ impl Registers {
             RegisterAlias::X => self.index_x,
             RegisterAlias::Y => self.index_y,
             RegisterAlias::S => self.stack_pointer,
+            RegisterAlias::P => self.status.get_byte(),
         }
     }
 }
