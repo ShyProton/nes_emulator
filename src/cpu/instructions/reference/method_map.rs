@@ -14,9 +14,9 @@ impl Cpu {
             SBC => todo!(),
 
             // Logical.
-            AND => todo!(),
-            EOR => todo!(),
-            ORA => todo!(),
+            AND => self.and(&instruction.addr_mode),
+            EOR => self.eor(&instruction.addr_mode),
+            ORA => self.ora(&instruction.addr_mode),
 
             // Bitshifting.
             ASL => todo!(),

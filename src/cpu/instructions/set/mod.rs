@@ -5,6 +5,7 @@ mod compare;
 mod crement;
 mod flags;
 mod load;
+mod logical;
 mod store;
 mod transfer;
 

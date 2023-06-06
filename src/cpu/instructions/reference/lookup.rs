@@ -24,7 +24,7 @@ pub static INSTRUCTION_LOOKUP: phf::Map<[u8; 1], Instruction> = phf_map! {
     [0x61] => Instruction::new(ADC, 2, 6, IndirectX),
     [0x71] => Instruction::new(ADC, 2, 5, IndirectY),
 
-    [0x29] => Instruction::new(AND, 2, 2, Implied),
+    [0x29] => Instruction::new(AND, 2, 2, Immediate),
     [0x25] => Instruction::new(AND, 2, 3, ZeroPage),
     [0x35] => Instruction::new(AND, 2, 4, ZeroPageX),
     [0x2D] => Instruction::new(AND, 3, 4, Absolute),
@@ -94,7 +94,7 @@ pub static INSTRUCTION_LOOKUP: phf::Map<[u8; 1], Instruction> = phf_map! {
 
     [0x88] => Instruction::new(DEY, 1, 2, Implied),
 
-    [0x49] => Instruction::new(EOR, 2, 2, Implied),
+    [0x49] => Instruction::new(EOR, 2, 2, Immediate),
     [0x45] => Instruction::new(EOR, 2, 3, ZeroPage),
     [0x55] => Instruction::new(EOR, 2, 4, ZeroPageX),
     [0x4D] => Instruction::new(EOR, 3, 4, Absolute),
