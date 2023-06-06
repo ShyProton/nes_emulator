@@ -72,12 +72,12 @@ impl Cpu {
             NOP => {}
 
             // Push stack.
-            PHA => todo!(),
-            PHP => todo!(),
+            PHA => self.pha(),
+            PHP => self.php(),
 
             // Pull stack.
-            PLA => todo!(),
-            PLP => todo!(),
+            PLA => self.pla(),
+            PLP => self.plp(),
 
             // Rotating.
             ROL => todo!(),
