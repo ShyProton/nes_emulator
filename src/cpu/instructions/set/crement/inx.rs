@@ -1,7 +1,7 @@
 use super::{Cpu, CrementMode, RegisterAlias};
 
 #[cfg(test)]
-use super::test_templates::immediate;
+use super::test_templates;
 
 impl Cpu {
     /// INX - Increment the X Register.
@@ -13,7 +13,7 @@ impl Cpu {
 
 #[cfg(test)]
 mod tests {
-    use super::{immediate, CrementMode, RegisterAlias};
+    use super::{test_templates::immediate, CrementMode, RegisterAlias};
 
     const REGISTER_ALIAS: RegisterAlias = RegisterAlias::X;
     const CREMENT_MODE: CrementMode = CrementMode::Increment;

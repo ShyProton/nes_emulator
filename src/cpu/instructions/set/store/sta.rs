@@ -1,7 +1,7 @@
 use super::{AddressingMode, Cpu, RegisterAlias};
 
 #[cfg(test)]
-use super::test_templates::{absolute, indirect, zero};
+use super::test_templates;
 
 impl Cpu {
     /// STA - Store Accumulator.
@@ -13,7 +13,10 @@ impl Cpu {
 
 #[cfg(test)]
 mod tests {
-    use super::{absolute, indirect, zero, RegisterAlias};
+    use super::{
+        test_templates::{absolute, indirect, zero},
+        RegisterAlias,
+    };
 
     const REGISTER_ALIAS: RegisterAlias = RegisterAlias::A;
 

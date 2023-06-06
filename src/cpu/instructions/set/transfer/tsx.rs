@@ -1,7 +1,7 @@
 use super::{Cpu, RegisterAlias};
 
 #[cfg(test)]
-use super::test_templates::implied;
+use super::test_templates;
 
 impl Cpu {
     /// TSX - Transfer Stack Pointer to X.
@@ -14,7 +14,7 @@ impl Cpu {
 
 #[cfg(test)]
 mod tests {
-    use super::{implied, RegisterAlias};
+    use super::{test_templates::implied, RegisterAlias};
 
     #[test]
     fn transfer() {

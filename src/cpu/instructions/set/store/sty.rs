@@ -1,7 +1,7 @@
 use super::{AddressingMode, Cpu, RegisterAlias};
 
 #[cfg(test)]
-use super::test_templates::{absolute, zero};
+use super::test_templates;
 
 impl Cpu {
     /// STY - Store Y register.
@@ -13,7 +13,10 @@ impl Cpu {
 
 #[cfg(test)]
 mod tests {
-    use super::{absolute, zero, RegisterAlias};
+    use super::{
+        test_templates::{absolute, zero},
+        RegisterAlias,
+    };
 
     const REGISTER_ALIAS: RegisterAlias = RegisterAlias::Y;
 

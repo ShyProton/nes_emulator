@@ -1,7 +1,7 @@
 use super::{Cpu, StatusFlagAlias};
 
 #[cfg(test)]
-use super::test_templates::implied;
+use super::test_templates;
 
 impl Cpu {
     /// SED - Set Decimal Flag.
@@ -13,7 +13,7 @@ impl Cpu {
 
 #[cfg(test)]
 mod tests {
-    use super::{implied, StatusFlagAlias};
+    use super::{test_templates::implied, StatusFlagAlias};
 
     #[test]
     fn check_flag() {

@@ -1,7 +1,7 @@
 use super::{AddressingMode, Cpu, RegisterAlias};
 
 #[cfg(test)]
-use super::test_templates::{absolute, immediate, zero};
+use super::test_templates;
 
 impl Cpu {
     /// CPX - Compare X Register.
@@ -14,7 +14,10 @@ impl Cpu {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use super::{
+        test_templates::{absolute, immediate, zero},
+        RegisterAlias,
+    };
 
     const REGISTER_ALIAS: RegisterAlias = RegisterAlias::X;
 

@@ -1,7 +1,7 @@
 use super::{AddressingMode, Cpu, CrementMode};
 
 #[cfg(test)]
-use super::test_templates::{absolute, zero};
+use super::test_templates;
 
 impl Cpu {
     /// DEC - Decrement Memory.
@@ -14,7 +14,10 @@ impl Cpu {
 
 #[cfg(test)]
 mod tests {
-    use super::{absolute, zero, CrementMode};
+    use super::{
+        test_templates::{absolute, zero},
+        CrementMode,
+    };
 
     const CREMENT_MODE: CrementMode = CrementMode::Decrement;
 
