@@ -19,8 +19,8 @@ impl Cpu {
             ORA => self.ora(&instruction.addr_mode),
 
             // Bitshifting.
-            ASL => todo!(),
-            LSR => todo!(),
+            ASL => self.asl(&instruction.addr_mode),
+            LSR => self.lsr(&instruction.addr_mode),
 
             // Branching.
             BCC => todo!(),
@@ -80,8 +80,8 @@ impl Cpu {
             PLP => self.plp(),
 
             // Rotating.
-            ROL => todo!(),
-            ROR => todo!(),
+            ROL => self.rol(&instruction.addr_mode),
+            ROR => self.ror(&instruction.addr_mode),
 
             // Returning.
             RTI => todo!(),
