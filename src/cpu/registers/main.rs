@@ -1,8 +1,5 @@
 use super::{Memory, Status};
 
-#[cfg(test)]
-use super::RegisterByte;
-
 pub struct Registers {
     pub program_counter: u16,
     pub stack_pointer: u8,
@@ -32,32 +29,5 @@ impl Registers {
 
         self.program_counter = memory.read_u16(Memory::PROGRAM_COUNTER_ADDRESS);
         self.status.reset_flags();
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn get_nth_bit() {
-        let mut registers = Registers::new();
-
-        for pos in 0..7 {
-            // Tests to ensure the bit is set.
-            registers.accumulator |= 0b0000_0001 << pos;
-            assert!(registers.accumulator.get_nth_bit(pos));
-
-            // Tests to ensure the bit is unset.
-            registers.accumulator &= !(0b0000_0001 << pos);
-            assert!(!registers.accumulator.get_nth_bit(pos));
-        }
-    }
-
-    #[test]
-    #[should_panic(expected = "bit position is out of bounds")]
-    fn get_nth_bit_oob() {
-        let registers = Registers::new();
-        registers.accumulator.get_nth_bit(8);
     }
 }
