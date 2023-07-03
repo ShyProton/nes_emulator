@@ -1,4 +1,4 @@
-use super::Cpu;
+use super::{Cpu, ShiftDirection, ShiftType, StatusFlagAlias};
 
 pub mod absolute;
 pub mod implied;

@@ -4,6 +4,9 @@ use super::{AddressingMode, Cpu, ShiftDirection, ShiftType};
 use super::test_templates;
 
 impl Cpu {
+    /// ROR - Rotate Right.
+    /// Move each of the bits in either A or M one place to the right. Bit 7 is filled with the
+    /// current value of the carry flag whilst the old bit 0 becomes the new carry flag value.
     pub fn ror(&mut self, addr_mode: &AddressingMode) {
         self.shift(addr_mode, &ShiftType::Rotate, &ShiftDirection::Right);
     }
@@ -11,30 +14,36 @@ impl Cpu {
 
 #[cfg(test)]
 mod tests {
-    use super::test_templates::{absolute, implied, zero};
+    use super::{
+        test_templates::{absolute, implied, zero},
+        ShiftDirection, ShiftType,
+    };
+
+    const TYPE: ShiftType = ShiftType::Rotate;
+    const DIRECTION: ShiftDirection = ShiftDirection::Right;
 
     #[test]
     fn rotate() {
-        todo!();
+        implied::shift(0x6A, &TYPE, &DIRECTION);
     }
 
     #[test]
     fn zero_rotate() {
-        todo!();
+        zero::shift_mem(0x66, &TYPE, &DIRECTION);
     }
 
     #[test]
     fn zero_x_rotate() {
-        todo!();
+        zero::x_shift_mem(0x76, &TYPE, &DIRECTION);
     }
 
     #[test]
     fn abs_rotate() {
-        todo!();
+        absolute::shift_mem(0x6E, &TYPE, &DIRECTION);
     }
 
     #[test]
     fn abs_x_rotate() {
-        todo!();
+        absolute::x_shift_mem(0x7E, &TYPE, &DIRECTION);
     }
 }
