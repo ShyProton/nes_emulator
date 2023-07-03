@@ -36,7 +36,7 @@ impl Cpu {
 
         match shift_direction {
             ShiftDirection::Right => {
-                result = byte >> 1 | carry_set << (8 - 1);
+                result = byte >> 1 | carry_set << 7;
                 old_bit = byte & 0b0000_0001;
             }
             ShiftDirection::Left => {

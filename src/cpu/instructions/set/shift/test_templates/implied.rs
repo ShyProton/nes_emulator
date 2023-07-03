@@ -19,7 +19,7 @@ pub fn shift(opcode: u8, shift_type: &ShiftType, shift_direction: &ShiftDirectio
 
     let (accumulator, carry) = match shift_direction {
         ShiftDirection::Left => (0b0011_0100 | carry_set, true),
-        ShiftDirection::Right => (0b0100_1101 | carry_set << (8 - 1), false),
+        ShiftDirection::Right => (0b0100_1101 | carry_set << 7, false),
     };
 
     assert_eq!(cpu.registers.accumulator, accumulator);

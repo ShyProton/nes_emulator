@@ -33,7 +33,7 @@ impl Cpu {
             BVS => todo!(),
 
             // Bit test.
-            BIT => todo!(),
+            BIT => self.bit(&instruction.addr_mode),
 
             // Force break.
             BRK => self.brk(),

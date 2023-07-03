@@ -1,5 +1,6 @@
 use super::{registers::aliases, AddressingMode, Cpu};
 
+mod bit;
 mod brk;
 mod compare;
 mod crement;
