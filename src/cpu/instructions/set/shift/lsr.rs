@@ -1,11 +1,11 @@
-use super::{AddressingMode, Cpu, ShiftType};
+use super::{AddressingMode, Cpu, ShiftDirection, ShiftType};
 
 #[cfg(test)]
 use super::test_templates;
 
 impl Cpu {
     pub fn lsr(&mut self, addr_mode: &AddressingMode) {
-        todo!();
+        self.shift(addr_mode, &ShiftType::Shift, &ShiftDirection::Right);
     }
 }
 
