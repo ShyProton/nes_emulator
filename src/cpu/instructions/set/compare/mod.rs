@@ -22,13 +22,6 @@ impl Cpu {
 
         let comparison = register_value.cmp(&self.memory.read(addr));
 
-        // println!("|| ORDERING: {comparison:?}, REGISTER: {target:?} ||");
-        // println!(
-        //     "|| REGISTER: {register_value:#04x}, MEMORY: {:#04x} ||",
-        //     self.memory.read(addr)
-        // );
-        // println!("|| READ FROM: {addr:#06x} ||");
-
         self.update_zero_and_negative_flags(register_value);
 
         self.registers

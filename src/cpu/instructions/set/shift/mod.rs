@@ -41,7 +41,7 @@ impl Cpu {
             }
             ShiftDirection::Left => {
                 result = byte << 1 | carry_set;
-                old_bit = byte & 0b1000_0000;
+                old_bit = byte & 0b0000_0001 << 7;
             }
         }
 
