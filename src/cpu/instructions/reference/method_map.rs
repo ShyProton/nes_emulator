@@ -10,8 +10,8 @@ impl Cpu {
     pub fn execute_instruction(&mut self, instruction: &Instruction) {
         match instruction.alias {
             // Arithmetic.
-            ADC => todo!(),
-            SBC => todo!(),
+            ADC => self.adc(&instruction.addr_mode),
+            SBC => self.sbc(&instruction.addr_mode),
 
             // Logical.
             AND => self.and(&instruction.addr_mode),
