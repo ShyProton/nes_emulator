@@ -5,7 +5,7 @@ use super::test_templates;
 
 impl Cpu {
     pub fn sbc(&mut self, subr_mode: &AddressingMode) {
-        self.add(subr_mode, &ArithmeticMode::Subtraction);
+        self.arithmetic(subr_mode, &ArithmeticMode::Subtraction);
     }
 }
 
@@ -20,7 +20,7 @@ mod tests {
 
     #[test]
     fn imm_sub() {
-        todo!();
+        immediate::arithmetic(0xE9, &ARITHMETIC_MODE);
     }
 
     #[test]

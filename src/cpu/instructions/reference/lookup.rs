@@ -15,7 +15,7 @@ use super::{
 use phf::phf_map;
 
 pub static INSTRUCTION_LOOKUP: phf::Map<[u8; 1], Instruction> = phf_map! {
-    [0x69] => Instruction::new(ADC, 2, 2, Implied),
+    [0x69] => Instruction::new(ADC, 2, 2, Immediate),
     [0x65] => Instruction::new(ADC, 2, 3, ZeroPage),
     [0x75] => Instruction::new(ADC, 2, 4, ZeroPageX),
     [0x6D] => Instruction::new(ADC, 3, 4, Absolute),

@@ -5,7 +5,7 @@ use super::test_templates;
 
 impl Cpu {
     pub fn adc(&mut self, addr_mode: &AddressingMode) {
-        self.add(addr_mode, &ArithmeticMode::Addition);
+        self.arithmetic(addr_mode, &ArithmeticMode::Addition);
     }
 }
 
@@ -20,7 +20,7 @@ mod tests {
 
     #[test]
     fn imm_add() {
-        todo!();
+        immediate::arithmetic(0x69, &ARITHMETIC_MODE);
     }
 
     #[test]

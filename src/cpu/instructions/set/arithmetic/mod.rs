@@ -6,7 +6,8 @@ mod sbc;
 #[cfg(test)]
 mod test_templates;
 
-enum ArithmeticMode {
+#[allow(clippy::module_name_repetitions)]
+pub enum ArithmeticMode {
     Addition,
     Subtraction,
 }
@@ -29,12 +30,12 @@ impl Cpu {
             .any(|&n| result < n)
     }
 
-    fn add(&mut self, addr_mode: &AddressingMode, arithmetic_mode: &ArithmeticMode) {
+    fn arithmetic(&mut self, addr_mode: &AddressingMode, arithmetic_mode: &ArithmeticMode) {
         let addr = self.get_operand_address(addr_mode);
 
         let operand = match arithmetic_mode {
             ArithmeticMode::Addition => self.memory.read(addr),
-            ArithmeticMode::Subtraction => (!self.memory.read(addr)).wrapping_add(1), // -X = !X+1
+            ArithmeticMode::Subtraction => !self.memory.read(addr), // SBC #num = ADC #~num
         };
 
         let carry_bit = u8::from(self.registers.status.get_flag(StatusFlagAlias::C));
