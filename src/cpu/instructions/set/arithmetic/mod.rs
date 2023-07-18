@@ -1,5 +1,8 @@
 use super::{aliases::StatusFlagAlias, AddressingMode, Cpu};
 
+#[cfg(test)]
+use super::aliases::RegisterAlias;
+
 mod adc;
 mod sbc;
 

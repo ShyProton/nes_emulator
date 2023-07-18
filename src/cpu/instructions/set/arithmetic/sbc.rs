@@ -25,36 +25,36 @@ mod tests {
 
     #[test]
     fn zero_sub() {
-        todo!();
+        zero::arithmetic(0xE5, &ARITHMETIC_MODE);
     }
 
     #[test]
     fn zero_x_sub() {
-        todo!();
+        zero::x_arithmetic(0xF5, &ARITHMETIC_MODE);
     }
 
     #[test]
     fn abs_sub() {
-        todo!();
+        absolute::arithmetic(0xED, &ARITHMETIC_MODE);
     }
 
     #[test]
     fn abs_x_sub() {
-        todo!();
+        absolute::x_arithmetic(0xFD, &ARITHMETIC_MODE);
     }
 
     #[test]
     fn abs_y_sub() {
-        todo!();
+        absolute::y_arithmetic(0xF9, &ARITHMETIC_MODE);
     }
 
     #[test]
     fn ind_x_sub() {
-        todo!();
+        indirect::x_arithmetic(0xE1, &ARITHMETIC_MODE);
     }
 
     #[test]
     fn ind_y_sub() {
-        todo!();
+        indirect::y_arithmetic(0xF1, &ARITHMETIC_MODE);
     }
 }

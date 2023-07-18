@@ -1,4 +1,4 @@
-use super::{ArithmeticMode, Cpu, StatusFlagAlias};
+use super::{ArithmeticMode, Cpu, RegisterAlias, StatusFlagAlias};
 
 pub mod absolute;
 pub mod immediate;
