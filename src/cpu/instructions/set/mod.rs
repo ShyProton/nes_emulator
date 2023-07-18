@@ -14,4 +14,4 @@ mod store;
 mod transfer;
 
 #[cfg(test)]
-mod tests;
+mod test_preperations;

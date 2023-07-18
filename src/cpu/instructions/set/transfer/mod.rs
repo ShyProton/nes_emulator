@@ -1,7 +1,7 @@
 use super::{aliases::RegisterAlias, Cpu};
 
 #[cfg(test)]
-use super::aliases::StatusFlagAlias;
+use super::{aliases::StatusFlagAlias, test_preperations};
 
 mod tax;
 mod tay;
