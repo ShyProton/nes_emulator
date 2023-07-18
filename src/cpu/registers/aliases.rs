@@ -1,6 +1,6 @@
 use super::Registers;
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq, Eq, Hash)]
 pub enum RegisterAlias {
     A, // Accumulator
     X, // X Register

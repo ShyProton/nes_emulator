@@ -1,11 +1,14 @@
 use super::{aliases::RegisterAlias, AddressingMode, Cpu};
 
+#[cfg(test)]
+use super::test_prep;
+
 mod sta;
 mod stx;
 mod sty;
 
 #[cfg(test)]
-mod test_templates;
+mod tests;
 
 impl Cpu {
     /// ST_ - Store a Register.

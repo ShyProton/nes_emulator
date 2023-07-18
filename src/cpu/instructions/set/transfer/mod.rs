@@ -1,7 +1,7 @@
 use super::{aliases::RegisterAlias, Cpu};
 
 #[cfg(test)]
-use super::{aliases::StatusFlagAlias, test_preperations};
+use super::aliases::StatusFlagAlias;
 
 mod tax;
 mod tay;
@@ -11,7 +11,7 @@ mod txs;
 mod tya;
 
 #[cfg(test)]
-mod test_templates;
+mod test_modes;
 
 impl Cpu {
     /// T__ - Transfer Between Registers.

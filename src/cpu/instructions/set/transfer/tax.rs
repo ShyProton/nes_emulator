@@ -1,7 +1,7 @@
 use super::{Cpu, RegisterAlias};
 
 #[cfg(test)]
-use super::test_templates;
+use super::test_modes;
 
 impl Cpu {
     /// TAX - Transfer Accumulator to X.
@@ -14,7 +14,7 @@ impl Cpu {
 
 #[cfg(test)]
 mod tests {
-    use super::{test_templates::implied, RegisterAlias};
+    use super::{test_modes::implied, RegisterAlias};
 
     #[test]
     fn transfer() {
