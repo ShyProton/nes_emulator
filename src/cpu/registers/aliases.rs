@@ -33,7 +33,7 @@ impl Registers {
     }
 }
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, PartialEq, Eq, Hash)]
 pub enum StatusFlagAlias {
     C = 0, // Carry Flag
     Z = 1, // Zero Flag
