@@ -21,7 +21,9 @@ fn base_store(opcode: u8, addr_mode: &AddressingMode, source: &RegisterAlias) {
 
 #[test]
 fn store() {
-    let instruction_map = HashMap::from([
+    type OpCodeModes = (Vec<u8>, Vec<AddressingMode>);
+
+    let instruction_map: HashMap<RegisterAlias, OpCodeModes> = HashMap::from([
         (
             RegisterAlias::A,
             (

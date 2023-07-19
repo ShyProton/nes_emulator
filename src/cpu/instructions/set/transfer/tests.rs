@@ -2,6 +2,8 @@ use std::collections::HashMap;
 
 use super::{test_prep, AddressingMode, Cpu, RegisterAlias, StatusFlagAlias};
 
+type Transfer = (RegisterAlias, RegisterAlias);
+
 fn base_transfer(opcode: u8, source: &RegisterAlias, target: &RegisterAlias) {
     let mut cpu = Cpu::new();
 
@@ -33,7 +35,7 @@ fn base_flag_check(opcode: u8, source: &RegisterAlias) {
     assert!(cpu.registers.status.get_flag(StatusFlagAlias::N));
 }
 
-fn get_instruction_map() -> HashMap<(RegisterAlias, RegisterAlias), u8> {
+fn get_instruction_map() -> HashMap<Transfer, u8> {
     HashMap::from([
         ((RegisterAlias::A, RegisterAlias::X), 0xAA),
         ((RegisterAlias::A, RegisterAlias::Y), 0xA8),

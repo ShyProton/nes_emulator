@@ -32,7 +32,8 @@ fn base_pull(opcode: u8, target: &RegisterAlias) {
 
 #[test]
 fn push() {
-    let instruction_map = HashMap::from([(RegisterAlias::A, 0x48), (RegisterAlias::P, 0x08)]);
+    let instruction_map: HashMap<RegisterAlias, u8> =
+        HashMap::from([(RegisterAlias::A, 0x48), (RegisterAlias::P, 0x08)]);
 
     for (register, opcode) in instruction_map {
         base_push(opcode, &register);
@@ -41,7 +42,8 @@ fn push() {
 
 #[test]
 fn pull() {
-    let instruction_map = HashMap::from([(RegisterAlias::A, 0x68), (RegisterAlias::P, 0x28)]);
+    let instruction_map: HashMap<RegisterAlias, u8> =
+        HashMap::from([(RegisterAlias::A, 0x68), (RegisterAlias::P, 0x28)]);
 
     for (register, opcode) in instruction_map {
         base_pull(opcode, &register);

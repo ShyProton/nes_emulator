@@ -3,7 +3,7 @@ use super::{
     AddressingMode::{self, Absolute, AbsoluteX, Implied, ZeroPage, ZeroPageX},
     Cpu, ShiftDirection, ShiftType, StatusFlagAlias,
 };
-use std::iter::zip;
+use std::{collections::HashMap, iter::zip};
 
 fn base_shift(
     opcode: u8,
@@ -43,10 +43,10 @@ fn base_shift(
 
 #[test]
 pub fn shift() {
-    type ShiftSpecifications = (ShiftType, ShiftDirection);
+    type ShiftSpecs = (ShiftType, ShiftDirection);
     type OpCodeModes = (Vec<u8>, Vec<AddressingMode>);
 
-    let instruction_map: [(ShiftSpecifications, OpCodeModes); 4] = [
+    let instruction_map: HashMap<ShiftSpecs, OpCodeModes> = HashMap::from([
         (
             (ShiftType::Shift, ShiftDirection::Left),
             (
@@ -75,7 +75,7 @@ pub fn shift() {
                 vec![Implied, ZeroPage, ZeroPageX, Absolute, AbsoluteX],
             ),
         ),
-    ];
+    ]);
 
     for ((shift_type, shift_direction), (opcodes, addr_modes)) in instruction_map {
         for (op, mode) in zip(opcodes, addr_modes) {

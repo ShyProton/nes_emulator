@@ -6,12 +6,14 @@ use super::test_prep;
 #[cfg(test)]
 mod tests;
 
+#[derive(PartialEq, Eq, Hash)]
 #[allow(clippy::module_name_repetitions)]
 pub enum ShiftType {
     Shift,
     Rotate,
 }
 
+#[derive(PartialEq, Eq, Hash)]
 #[allow(clippy::module_name_repetitions)]
 pub enum ShiftDirection {
     Left,
