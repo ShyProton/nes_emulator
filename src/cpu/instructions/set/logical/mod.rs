@@ -1,15 +1,12 @@
 use super::{AddressingMode, Cpu};
 
 #[cfg(test)]
-use super::aliases::RegisterAlias;
-
-mod and;
-mod eor;
-mod ora;
+use super::test_prep;
 
 #[cfg(test)]
-mod test_templates;
+mod tests;
 
+#[derive(PartialEq, Eq, Hash)]
 #[allow(clippy::module_name_repetitions)]
 pub enum LogicalOperation {
     And,
@@ -32,5 +29,26 @@ impl Cpu {
 
         perform_logical_operation(&mut self.registers.accumulator, argument, logical_op);
         self.update_zero_and_negative_flags(self.registers.accumulator);
+    }
+
+    /// AND - Logical AND.
+    /// A logical AND is performed, bit by bit, on the accumulator contents using the contents of
+    /// a byte of memory.
+    pub fn and(&mut self, addr_mode: &AddressingMode) {
+        self.logical(addr_mode, &LogicalOperation::And);
+    }
+
+    /// EOR - Exclusive OR.
+    /// An exclusive OR is performed, bit by bit, on the accumulator contents using the contents of
+    /// a byte of memory.
+    pub fn eor(&mut self, addr_mode: &AddressingMode) {
+        self.logical(addr_mode, &LogicalOperation::Eor);
+    }
+
+    /// ORA - Logical Inclusive OR.
+    /// An inclusive OR is performed, bit by bit, on the accumulator contents using the contents of
+    /// a byte of memory.
+    pub fn ora(&mut self, addr_mode: &AddressingMode) {
+        self.logical(addr_mode, &LogicalOperation::Ora);
     }
 }
