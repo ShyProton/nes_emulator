@@ -5,12 +5,11 @@ use super::{
     AddressingMode, Cpu,
 };
 
-mod cmp;
-mod cpx;
-mod cpy;
+#[cfg(test)]
+use super::test_prep;
 
 #[cfg(test)]
-mod test_templates;
+mod tests;
 
 impl Cpu {
     /// CP_ - Compare a register.
@@ -28,5 +27,26 @@ impl Cpu {
             .status
             .set_flag(StatusFlagAlias::C, comparison != Ordering::Less)
             .set_flag(StatusFlagAlias::Z, comparison == Ordering::Equal);
+    }
+
+    /// CMP - Compare Accumulator.
+    /// This instruction compares the contents of the accumulator with another memory held value
+    /// and sets the zero and carry flags as appropriate.
+    pub fn cmp(&mut self, addr_mode: &AddressingMode) {
+        self.compare(&RegisterAlias::A, addr_mode);
+    }
+
+    /// CPX - Compare X Register.
+    /// This instruction compares the contents of the X register with another memory held value and
+    /// sets the zero and carry flags as appropriate.
+    pub fn cpx(&mut self, addr_mode: &AddressingMode) {
+        self.compare(&RegisterAlias::X, addr_mode);
+    }
+
+    /// CPY - Compare Y Register.
+    /// This instruction compares the contents of the Y register with another memory held value and
+    /// sets the zero and carry flags as appropriate.
+    pub fn cpy(&mut self, addr_mode: &AddressingMode) {
+        self.compare(&RegisterAlias::Y, addr_mode);
     }
 }
