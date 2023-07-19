@@ -77,6 +77,7 @@ pub fn get_addr(addr_mode: &AddressingMode) -> u16 {
 
 pub fn prepare(cpu: &mut Cpu, opcode: u8, addr_mode: &AddressingMode, value: u8) {
     match addr_mode {
+        AddressingMode::Implied => implied(cpu, opcode),
         AddressingMode::Immediate => immediate(cpu, opcode, value),
         AddressingMode::ZeroPage => zero(cpu, None, opcode, value),
         AddressingMode::ZeroPageX => zero(cpu, Some(&RegisterAlias::X), opcode, value),
@@ -86,6 +87,5 @@ pub fn prepare(cpu: &mut Cpu, opcode: u8, addr_mode: &AddressingMode, value: u8)
         AddressingMode::AbsoluteY => absolute(cpu, Some(&RegisterAlias::Y), opcode, value),
         AddressingMode::IndirectX => indirect_x(cpu, opcode, value),
         AddressingMode::IndirectY => indirect_y(cpu, opcode, value),
-        AddressingMode::Implied => implied(cpu, opcode),
     };
 }

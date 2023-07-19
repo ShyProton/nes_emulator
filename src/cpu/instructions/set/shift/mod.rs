@@ -1,12 +1,10 @@
 use super::{aliases::StatusFlagAlias, AddressingMode, Cpu};
 
-mod asl;
-mod lsr;
-mod rol;
-mod ror;
+#[cfg(test)]
+use super::test_prep;
 
 #[cfg(test)]
-mod test_templates;
+mod tests;
 
 #[allow(clippy::module_name_repetitions)]
 pub enum ShiftType {
@@ -48,6 +46,7 @@ impl Cpu {
         (result, old_bit)
     }
 
+    /// Base for shifting/rotating.
     fn shift(
         &mut self,
         addr_mode: &AddressingMode,
@@ -78,5 +77,35 @@ impl Cpu {
             .set_flag(StatusFlagAlias::C, old_bit != 0);
 
         self.update_zero_and_negative_flags(result);
+    }
+
+    /// ASL - Arithmetic Shift Left.
+    /// This operation shifts all the bits of the accumulator or memory contents one bit left. Bit 0
+    /// is set to 0 and bit 7 is placed in the carry flag. The effect of this operation is to
+    /// multiply the memory contents by 2 (ignoring 2's complement considerations), setting the
+    /// carry if the result will not fit in 8 bits.
+    pub fn asl(&mut self, addr_mode: &AddressingMode) {
+        self.shift(addr_mode, &ShiftType::Shift, &ShiftDirection::Left);
+    }
+
+    /// LSR - Logical Shift Right.
+    /// Each of the bits in A or M is shift one place to the right. The bit that was in bit 0 is
+    /// shifted into the carry flag. Bit 7 is set to zero.
+    pub fn lsr(&mut self, addr_mode: &AddressingMode) {
+        self.shift(addr_mode, &ShiftType::Shift, &ShiftDirection::Right);
+    }
+
+    /// ROL - Rotate Left.
+    /// Move each of the bits in either A or M one place to the left. Bit 0 is filled with the
+    /// current value of the carry flag whilst the old bit 7 becomes the new carry flag value.
+    pub fn rol(&mut self, addr_mode: &AddressingMode) {
+        self.shift(addr_mode, &ShiftType::Rotate, &ShiftDirection::Left);
+    }
+
+    /// ROR - Rotate Right.
+    /// Move each of the bits in either A or M one place to the right. Bit 7 is filled with the
+    /// current value of the carry flag whilst the old bit 0 becomes the new carry flag value.
+    pub fn ror(&mut self, addr_mode: &AddressingMode) {
+        self.shift(addr_mode, &ShiftType::Rotate, &ShiftDirection::Right);
     }
 }
