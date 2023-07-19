@@ -5,7 +5,7 @@ use super::{
     },
     Cpu, LogicalOperation,
 };
-use std::collections::HashMap;
+use std::{collections::HashMap, iter::zip};
 
 fn base_logical(opcode: u8, addr_mode: &AddressingMode, logical_op: &LogicalOperation) {
     let mut cpu = Cpu::new();
@@ -24,28 +24,31 @@ fn base_logical(opcode: u8, addr_mode: &AddressingMode, logical_op: &LogicalOper
 
 #[test]
 fn logical() {
-    let addr_modes = vec![
+    const MODE_COUNT: usize = 8;
+    const ADDR_MODES: [AddressingMode; MODE_COUNT] = [
         Immediate, ZeroPage, ZeroPageX, Absolute, AbsoluteX, AbsoluteY, IndirectX, IndirectY,
     ];
 
-    let instruction_map: HashMap<LogicalOperation, Vec<u8>> = HashMap::from([
+    type OpCodes = [u8; MODE_COUNT];
+
+    let instruction_map: HashMap<LogicalOperation, OpCodes> = HashMap::from([
         (
             LogicalOperation::And,
-            vec![0x29, 0x25, 0x35, 0x2D, 0x3D, 0x39, 0x21, 0x31],
+            [0x29, 0x25, 0x35, 0x2D, 0x3D, 0x39, 0x21, 0x31],
         ),
         (
             LogicalOperation::Eor,
-            vec![0x49, 0x45, 0x55, 0x4D, 0x5D, 0x59, 0x41, 0x51],
+            [0x49, 0x45, 0x55, 0x4D, 0x5D, 0x59, 0x41, 0x51],
         ),
         (
             LogicalOperation::Ora,
-            vec![0x09, 0x05, 0x15, 0x0D, 0x1D, 0x19, 0x01, 0x11],
+            [0x09, 0x05, 0x15, 0x0D, 0x1D, 0x19, 0x01, 0x11],
         ),
     ]);
 
     for (logical_op, opcodes) in instruction_map {
-        for (i, code) in opcodes.iter().enumerate() {
-            base_logical(*code, &addr_modes[i], &logical_op);
+        for (code, mode) in zip(opcodes, ADDR_MODES) {
+            base_logical(code, &mode, &logical_op);
         }
     }
 }

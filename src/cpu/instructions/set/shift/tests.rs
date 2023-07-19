@@ -43,43 +43,35 @@ fn base_shift(
 
 #[test]
 pub fn shift() {
-    type ShiftSpecs = (ShiftType, ShiftDirection);
-    type OpCodeModes = (Vec<u8>, Vec<AddressingMode>);
+    const MODE_COUNT: usize = 5;
+    const ADDR_MODES: [AddressingMode; MODE_COUNT] =
+        [Implied, ZeroPage, ZeroPageX, Absolute, AbsoluteX];
 
-    let instruction_map: HashMap<ShiftSpecs, OpCodeModes> = HashMap::from([
+    type ShiftSpecs = (ShiftType, ShiftDirection);
+    type OpCodes = [u8; MODE_COUNT];
+
+    let instruction_map: HashMap<ShiftSpecs, OpCodes> = HashMap::from([
         (
             (ShiftType::Shift, ShiftDirection::Left),
-            (
-                vec![0x0A, 0x06, 0x16, 0x0E, 0x1E],
-                vec![Implied, ZeroPage, ZeroPageX, Absolute, AbsoluteX],
-            ),
+            [0x0A, 0x06, 0x16, 0x0E, 0x1E],
         ),
         (
             (ShiftType::Shift, ShiftDirection::Right),
-            (
-                vec![0x4A, 0x46, 0x56, 0x4E, 0x5E],
-                vec![Implied, ZeroPage, ZeroPageX, Absolute, AbsoluteX],
-            ),
+            [0x4A, 0x46, 0x56, 0x4E, 0x5E],
         ),
         (
             (ShiftType::Rotate, ShiftDirection::Left),
-            (
-                vec![0x2A, 0x26, 0x36, 0x2E, 0x3E],
-                vec![Implied, ZeroPage, ZeroPageX, Absolute, AbsoluteX],
-            ),
+            [0x2A, 0x26, 0x36, 0x2E, 0x3E],
         ),
         (
             (ShiftType::Rotate, ShiftDirection::Right),
-            (
-                vec![0x6A, 0x66, 0x76, 0x6E, 0x7E],
-                vec![Implied, ZeroPage, ZeroPageX, Absolute, AbsoluteX],
-            ),
+            [0x6A, 0x66, 0x76, 0x6E, 0x7E],
         ),
     ]);
 
-    for ((shift_type, shift_direction), (opcodes, addr_modes)) in instruction_map {
-        for (op, mode) in zip(opcodes, addr_modes) {
-            base_shift(op, &mode, &shift_type, &shift_direction);
+    for ((shift_type, shift_direction), opcodes) in instruction_map {
+        for (code, mode) in zip(opcodes, ADDR_MODES) {
+            base_shift(code, &mode, &shift_type, &shift_direction);
         }
     }
 }
