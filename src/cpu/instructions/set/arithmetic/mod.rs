@@ -1,14 +1,12 @@
 use super::{aliases::StatusFlagAlias, AddressingMode, Cpu};
 
 #[cfg(test)]
-use super::aliases::RegisterAlias;
-
-mod adc;
-mod sbc;
+use super::test_prep;
 
 #[cfg(test)]
-mod test_templates;
+mod tests;
 
+#[derive(PartialEq, Eq, Hash)]
 #[allow(clippy::module_name_repetitions)]
 pub enum ArithmeticMode {
     Addition,
@@ -33,6 +31,7 @@ fn carry_occurred(operand_1: u8, operand_2: u8, carry_bit: u8, result: u8) -> bo
 }
 
 impl Cpu {
+    /// Base for adding/subtracting.
     fn arithmetic(&mut self, addr_mode: &AddressingMode, arithmetic_mode: &ArithmeticMode) {
         let addr = self.get_operand_address(addr_mode);
 
@@ -59,5 +58,22 @@ impl Cpu {
             .status
             .set_flag(StatusFlagAlias::C, carry_occurred)
             .set_flag(StatusFlagAlias::V, overflow_occurred);
+    }
+
+    /// ADC - Add with Carry.
+    /// This instruction adds the contents of a memory location to the
+    /// accumulator together with the carry bit. If verflow occurs the carry bit
+    /// is set, this enables multiple byte addition to be performed.
+    pub fn adc(&mut self, addr_mode: &AddressingMode) {
+        self.arithmetic(addr_mode, &ArithmeticMode::Addition);
+    }
+
+    /// SBC - Subtract with Carry.
+    /// This instructions subtracts the contents of a memory location to the
+    /// accumulator together with the not of the carry bit. If overflow occurs
+    /// the carry bit is clear, this enabled multiple byte subtraction to be
+    /// performed.
+    pub fn sbc(&mut self, subr_mode: &AddressingMode) {
+        self.arithmetic(subr_mode, &ArithmeticMode::Subtraction);
     }
 }
