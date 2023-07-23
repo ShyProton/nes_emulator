@@ -37,14 +37,14 @@ fn branch() {
     type FlagSetting = (StatusFlagAlias, bool);
 
     let instruction_map: HashMap<FlagSetting, u8> = HashMap::from([
-        ((StatusFlagAlias::C, false), 0x90),
-        ((StatusFlagAlias::C, true), 0xB0),
-        ((StatusFlagAlias::Z, true), 0xF0),
-        ((StatusFlagAlias::N, true), 0x30),
-        ((StatusFlagAlias::Z, false), 0xD0),
-        ((StatusFlagAlias::N, false), 0x10),
-        ((StatusFlagAlias::V, false), 0x50),
-        ((StatusFlagAlias::V, true), 0x70),
+        ((StatusFlagAlias::C, false), 0x90), // BCC
+        ((StatusFlagAlias::C, true), 0xB0),  // BCS
+        ((StatusFlagAlias::Z, true), 0xF0),  // BEQ
+        ((StatusFlagAlias::N, true), 0x30),  // BMI
+        ((StatusFlagAlias::Z, false), 0xD0), // BNE
+        ((StatusFlagAlias::N, false), 0x10), // BPL
+        ((StatusFlagAlias::V, false), 0x50), // BVC
+        ((StatusFlagAlias::V, true), 0x70),  // BVS
     ]);
 
     for ((flag, setting), code) in instruction_map {

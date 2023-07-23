@@ -33,15 +33,15 @@ fn logical() {
 
     let instruction_map: HashMap<LogicalOperation, OpCodes> = HashMap::from([
         (
-            LogicalOperation::And,
+            LogicalOperation::And, // AND
             [0x29, 0x25, 0x35, 0x2D, 0x3D, 0x39, 0x21, 0x31],
         ),
         (
-            LogicalOperation::Eor,
+            LogicalOperation::Eor, // EOR
             [0x49, 0x45, 0x55, 0x4D, 0x5D, 0x59, 0x41, 0x51],
         ),
         (
-            LogicalOperation::Ora,
+            LogicalOperation::Ora, // ORA
             [0x09, 0x05, 0x15, 0x0D, 0x1D, 0x19, 0x01, 0x11],
         ),
     ]);

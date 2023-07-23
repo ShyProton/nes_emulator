@@ -40,7 +40,7 @@ fn base_flag_check(opcode: u8, addr_mode: &AddressingMode) {
 fn get_instruction_map() -> HashMap<RegisterAlias, OpCodeModes> {
     HashMap::from([
         (
-            RegisterAlias::A,
+            RegisterAlias::A, // LDA
             (
                 vec![0xA9, 0xA5, 0xB5, 0xAD, 0xBD, 0xB9, 0xA1, 0xB1],
                 vec![
@@ -50,14 +50,14 @@ fn get_instruction_map() -> HashMap<RegisterAlias, OpCodeModes> {
             ),
         ),
         (
-            RegisterAlias::X,
+            RegisterAlias::X, // LDX
             (
                 vec![0xA2, 0xA6, 0xB6, 0xAE, 0xBE],
                 vec![Immediate, ZeroPage, ZeroPageY, Absolute, AbsoluteY],
             ),
         ),
         (
-            RegisterAlias::Y,
+            RegisterAlias::Y, // LDY
             (
                 vec![0xA0, 0xA4, 0xB4, 0xAC, 0xBC],
                 vec![Immediate, ZeroPage, ZeroPageX, Absolute, AbsoluteX],

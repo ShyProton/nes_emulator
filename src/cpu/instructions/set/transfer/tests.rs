@@ -37,12 +37,12 @@ fn base_flag_check(opcode: u8, source: &RegisterAlias) {
 
 fn get_instruction_map() -> HashMap<Transfer, u8> {
     HashMap::from([
-        ((RegisterAlias::A, RegisterAlias::X), 0xAA),
-        ((RegisterAlias::A, RegisterAlias::Y), 0xA8),
-        ((RegisterAlias::S, RegisterAlias::X), 0xBA),
-        ((RegisterAlias::X, RegisterAlias::A), 0x8A),
-        ((RegisterAlias::X, RegisterAlias::S), 0x9A),
-        ((RegisterAlias::Y, RegisterAlias::A), 0x98),
+        ((RegisterAlias::A, RegisterAlias::X), 0xAA), // TAX
+        ((RegisterAlias::A, RegisterAlias::Y), 0xA8), // TAY
+        ((RegisterAlias::S, RegisterAlias::X), 0xBA), // TSX
+        ((RegisterAlias::X, RegisterAlias::A), 0x8A), // TXA
+        ((RegisterAlias::X, RegisterAlias::S), 0x9A), // TXS
+        ((RegisterAlias::Y, RegisterAlias::A), 0x98), // TYA
     ])
 }
 

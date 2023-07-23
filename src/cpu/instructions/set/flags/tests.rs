@@ -16,13 +16,13 @@ fn check_flag() {
     type FlagSetting = (StatusFlagAlias, bool);
 
     let instruction_map: HashMap<FlagSetting, u8> = HashMap::from([
-        ((StatusFlagAlias::C, false), 0x18),
-        ((StatusFlagAlias::D, false), 0xD8),
-        ((StatusFlagAlias::I, false), 0x58),
-        ((StatusFlagAlias::V, false), 0xB8),
-        ((StatusFlagAlias::C, true), 0x38),
-        ((StatusFlagAlias::D, true), 0xF8),
-        ((StatusFlagAlias::I, true), 0x78),
+        ((StatusFlagAlias::C, false), 0x18), // CLC
+        ((StatusFlagAlias::D, false), 0xD8), // CLD
+        ((StatusFlagAlias::I, false), 0x58), // CLI
+        ((StatusFlagAlias::V, false), 0xB8), // CLV
+        ((StatusFlagAlias::C, true), 0x38),  // SEC
+        ((StatusFlagAlias::D, true), 0xF8),  // SED
+        ((StatusFlagAlias::I, true), 0x78),  // SEI
     ]);
 
     for ((flag, setting), code) in instruction_map {

@@ -52,19 +52,19 @@ pub fn shift() {
 
     let instruction_map: HashMap<ShiftSpecs, OpCodes> = HashMap::from([
         (
-            (ShiftType::Shift, ShiftDirection::Left),
+            (ShiftType::Shift, ShiftDirection::Left), // ASL
             [0x0A, 0x06, 0x16, 0x0E, 0x1E],
         ),
         (
-            (ShiftType::Shift, ShiftDirection::Right),
+            (ShiftType::Shift, ShiftDirection::Right), // LSR
             [0x4A, 0x46, 0x56, 0x4E, 0x5E],
         ),
         (
-            (ShiftType::Rotate, ShiftDirection::Left),
+            (ShiftType::Rotate, ShiftDirection::Left), // ROL
             [0x2A, 0x26, 0x36, 0x2E, 0x3E],
         ),
         (
-            (ShiftType::Rotate, ShiftDirection::Right),
+            (ShiftType::Rotate, ShiftDirection::Right), // ROR
             [0x6A, 0x66, 0x76, 0x6E, 0x7E],
         ),
     ]);

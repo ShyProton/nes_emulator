@@ -69,33 +69,33 @@ fn base_wrapping(
 fn get_instruction_map() -> HashMap<IncrementSpecs, OpCodeModes> {
     HashMap::from([
         (
-            (CrementMode::Decrement, None),
+            (CrementMode::Decrement, None), // DEC
             (
                 vec![0xC6, 0xD6, 0xCE, 0xDE],
                 vec![ZeroPage, ZeroPageX, Absolute, AbsoluteX],
             ),
         ),
         (
-            (CrementMode::Increment, None),
+            (CrementMode::Increment, None), // INC
             (
                 vec![0xE6, 0xF6, 0xEE, 0xFE],
                 vec![ZeroPage, ZeroPageX, Absolute, AbsoluteX],
             ),
         ),
         (
-            (CrementMode::Decrement, Some(RegisterAlias::X)),
+            (CrementMode::Decrement, Some(RegisterAlias::X)), // DEX
             (vec![0xCA], vec![Implied]),
         ),
         (
-            (CrementMode::Decrement, Some(RegisterAlias::Y)),
+            (CrementMode::Decrement, Some(RegisterAlias::Y)), // DEY
             (vec![0x88], vec![Implied]),
         ),
         (
-            (CrementMode::Increment, Some(RegisterAlias::X)),
+            (CrementMode::Increment, Some(RegisterAlias::X)), // INX
             (vec![0xE8], vec![Implied]),
         ),
         (
-            (CrementMode::Increment, Some(RegisterAlias::Y)),
+            (CrementMode::Increment, Some(RegisterAlias::Y)), // INY
             (vec![0xC8], vec![Implied]),
         ),
     ])

@@ -58,11 +58,11 @@ fn arithmetic() {
 
     let instruction_map: HashMap<ArithmeticMode, OpCodes> = HashMap::from([
         (
-            ArithmeticMode::Addition,
+            ArithmeticMode::Addition, // ADC
             [0x69, 0x65, 0x75, 0x6D, 0x7D, 0x79, 0x61, 0x71],
         ),
         (
-            ArithmeticMode::Subtraction,
+            ArithmeticMode::Subtraction, // SBC
             [0xE9, 0xE5, 0xF5, 0xED, 0xFD, 0xF9, 0xE1, 0xF1],
         ),
     ]);

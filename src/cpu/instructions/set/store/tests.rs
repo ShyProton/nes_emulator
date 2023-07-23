@@ -25,7 +25,7 @@ fn store() {
 
     let instruction_map: HashMap<RegisterAlias, OpCodeModes> = HashMap::from([
         (
-            RegisterAlias::A,
+            RegisterAlias::A, // STA
             (
                 vec![0x85, 0x95, 0x8D, 0x9D, 0x99, 0x81, 0x91],
                 vec![
@@ -34,11 +34,11 @@ fn store() {
             ),
         ),
         (
-            RegisterAlias::X,
+            RegisterAlias::X, // STX
             (vec![0x86, 0x96, 0x8E], vec![ZeroPage, ZeroPageY, Absolute]),
         ),
         (
-            RegisterAlias::Y,
+            RegisterAlias::Y, // STY
             (vec![0x84, 0x94, 0x8C], vec![ZeroPage, ZeroPageX, Absolute]),
         ),
     ]);

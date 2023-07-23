@@ -42,7 +42,7 @@ fn compare() {
 
     let instruction_map: HashMap<RegisterAlias, OpCodeModes> = HashMap::from([
         (
-            RegisterAlias::A,
+            RegisterAlias::A, // CMP
             (
                 vec![0xC9, 0xC5, 0xD5, 0xCD, 0xDD, 0xD9, 0xC1, 0xD1],
                 vec![
@@ -52,11 +52,11 @@ fn compare() {
             ),
         ),
         (
-            RegisterAlias::X,
+            RegisterAlias::X, // CPX
             (vec![0xE0, 0xE4, 0xEC], vec![Immediate, ZeroPage, Absolute]),
         ),
         (
-            RegisterAlias::Y,
+            RegisterAlias::Y, // CPY
             (vec![0xC0, 0xC4, 0xCC], vec![Immediate, ZeroPage, Absolute]),
         ),
     ]);
