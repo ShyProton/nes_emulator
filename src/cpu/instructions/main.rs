@@ -32,7 +32,7 @@ impl Cpu {
         let opcode = self.memory.read(self.registers.program_counter);
 
         let instruction = INSTRUCTION_LOOKUP.get(&[opcode]).map_or_else(
-            || panic!("invalid opcode lookup for instruction"),
+            || panic!("invalid opcode lookup for instruction: {opcode:0x}"),
             |instruction| instruction,
         );
 

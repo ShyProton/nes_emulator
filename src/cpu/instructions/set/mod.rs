@@ -2,6 +2,7 @@ use super::{registers::aliases, AddressingMode, Cpu};
 
 mod arithmetic;
 mod bit;
+mod branch;
 mod brk;
 mod compare;
 mod crement;

@@ -23,14 +23,14 @@ impl Cpu {
             LSR => self.lsr(&instruction.addr_mode),
 
             // Branching.
-            BCC => todo!(),
-            BCS => todo!(),
-            BEQ => todo!(),
-            BMI => todo!(),
-            BNE => todo!(),
-            BPL => todo!(),
-            BVC => todo!(),
-            BVS => todo!(),
+            BCC => self.bcc(),
+            BCS => self.bcs(),
+            BEQ => self.beq(),
+            BMI => self.bmi(),
+            BNE => self.bne(),
+            BPL => self.bpl(),
+            BVC => self.bvc(),
+            BVS => self.bvs(),
 
             // Bit test.
             BIT => self.bit(&instruction.addr_mode),
