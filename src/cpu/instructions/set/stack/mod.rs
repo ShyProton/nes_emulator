@@ -7,10 +7,6 @@ use super::{aliases::StatusFlagAlias, test_prep, AddressingMode};
 mod tests;
 
 impl Cpu {
-    pub fn get_stack_addr(&self) -> u16 {
-        0x0100 + u16::from(self.registers.stack_pointer)
-    }
-
     /// PH_ - Push Register.
     /// Pushes a copy of a register on to the stack.
     fn push_stack(&mut self, target: &RegisterAlias) {
