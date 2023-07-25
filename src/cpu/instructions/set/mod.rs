@@ -9,6 +9,7 @@ mod crement;
 mod flags;
 mod load;
 mod logical;
+mod returning;
 mod shift;
 mod stack;
 mod store;

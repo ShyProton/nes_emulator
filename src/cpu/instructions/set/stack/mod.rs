@@ -7,7 +7,7 @@ use super::{aliases::StatusFlagAlias, test_prep, AddressingMode};
 mod tests;
 
 impl Cpu {
-    fn get_stack_addr(&self) -> u16 {
+    pub fn get_stack_addr(&self) -> u16 {
         0x0100 + u16::from(self.registers.stack_pointer)
     }
 
@@ -51,7 +51,7 @@ impl Cpu {
         self.update_zero_and_negative_flags(self.registers.accumulator);
     }
 
-    /// PLP - Pul Processor Status.
+    /// PLP - Pull Processor Status.
     /// Pulls an 8 bit value from the stack and into the processor flags. The flags will take on
     /// new states as determined by the value pulled.
     pub fn plp(&mut self) {

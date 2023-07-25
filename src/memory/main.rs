@@ -26,7 +26,7 @@ impl Memory {
     pub fn read_u16(&self, address: u16) -> u16 {
         // Reading as little-endian.
         let lo = u16::from(self.read(address));
-        let hi = u16::from(self.read(address + 1));
+        let hi = u16::from(self.read(address.wrapping_add(1)));
         (hi << 8) | lo
     }
 
@@ -37,7 +37,7 @@ impl Memory {
         let lo = (data & 0xFF) as u8;
 
         self.write(address, lo);
-        self.write(address + 1, hi);
+        self.write(address.wrapping_add(1), hi);
     }
 
     pub fn load(&mut self, program: &[u8]) {

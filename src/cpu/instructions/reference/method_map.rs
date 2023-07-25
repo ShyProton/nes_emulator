@@ -84,8 +84,8 @@ impl Cpu {
             ROR => self.ror(&instruction.addr_mode),
 
             // Returning.
-            RTI => todo!(),
-            RTS => todo!(),
+            RTI => self.rti(),
+            RTS => self.rts(),
 
             // Flag setting.
             SEC => self.sec(),
