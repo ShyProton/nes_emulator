@@ -1,4 +1,4 @@
-use super::{test_prep, u8_to_u16, AddressingMode, Cpu, StatusFlagAlias};
+use super::{extend_byte, test_prep, AddressingMode, Cpu, StatusFlagAlias};
 use std::collections::HashMap;
 
 // Number of bytes the branching instructions have.
@@ -16,7 +16,7 @@ fn base_branch(opcode: u8, flag: StatusFlagAlias, setting: bool) {
             .registers
             .program_counter
             .wrapping_add(if setting == initial_setting {
-                u8_to_u16(displacement)
+                extend_byte(displacement)
             } else {
                 0
             })

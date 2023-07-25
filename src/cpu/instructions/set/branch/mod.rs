@@ -7,14 +7,7 @@ use super::test_prep;
 mod tests;
 
 #[allow(clippy::cast_sign_loss)]
-pub fn u8_to_u16(byte: u8) -> u16 {
-    // let padding = if byte & 0b0000_0001 << 7 == 0 {
-    //     0x00
-    // } else {
-    //     0xFF
-    // };
-    //
-    // u16::from_be_bytes([padding, byte])
+pub fn extend_byte(byte: u8) -> u16 {
     i16::from(byte) as u16
 }
 
@@ -29,7 +22,7 @@ impl Cpu {
             self.registers.program_counter = self
                 .registers
                 .program_counter
-                .wrapping_add(u8_to_u16(displacement));
+                .wrapping_add(extend_byte(displacement));
         }
     }
 
