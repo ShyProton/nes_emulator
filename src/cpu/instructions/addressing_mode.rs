@@ -38,7 +38,7 @@ impl Cpu {
         };
 
         // Always reads at least one byte.
-        self.registers.program_counter += 1;
+        self.registers.program_counter = self.registers.program_counter.wrapping_add(0x0001);
 
         addr
     }
@@ -50,7 +50,8 @@ impl Cpu {
 
     fn absolute(&mut self, register: u8) -> u16 {
         let base = self.memory.read_u16(self.registers.program_counter);
-        self.registers.program_counter += 1; // Reads an extra byte.
+        // Reads an extra byte.
+        self.registers.program_counter = self.registers.program_counter.wrapping_add(0x0001);
 
         base.wrapping_add(u16::from(register))
     }

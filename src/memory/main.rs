@@ -6,7 +6,7 @@ pub struct Memory {
 
 impl Memory {
     pub const PROGRAM_COUNTER_ADDRESS: u16 = 0xFFFC;
-    const PRG_ROM_START: u16 = 0x8000;
+    pub const PRG_ROM_START: u16 = 0x8000;
 
     pub const fn new() -> Self {
         Self {

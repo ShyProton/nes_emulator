@@ -60,8 +60,8 @@ impl Cpu {
             INY => self.iny(),
 
             // Jumping.
-            JMP => todo!(),
-            JSR => todo!(),
+            JMP => self.jmp(&instruction.addr_mode),
+            JSR => self.jsr(),
 
             // Loading.
             LDA => self.lda(&instruction.addr_mode),

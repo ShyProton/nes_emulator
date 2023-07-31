@@ -7,6 +7,7 @@ mod brk;
 mod compare;
 mod crement;
 mod flags;
+mod jump;
 mod load;
 mod logical;
 mod returning;
