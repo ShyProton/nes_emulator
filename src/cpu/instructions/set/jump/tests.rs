@@ -6,11 +6,11 @@ fn base_jump(opcode: u8, addr_mode: &AddressingMode, jump_type: &JumpType) {
     let mut cpu = Cpu::new();
     let indirect_val = 0xEA; // NOP
 
-    test_prep::prepare(&mut cpu, opcode, &AddressingMode::Absolute, indirect_val);
+    test_prep::prepare(&mut cpu, opcode, addr_mode, indirect_val);
 
     let (expected_program_counter, nop_subtraction) = match addr_mode {
         AddressingMode::Absolute => (test_prep::ABS_ADDR, 1),
-        AddressingMode::Implied => (cpu.memory.read_u16(test_prep::ABS_ADDR), 0),
+        AddressingMode::Indirect => (cpu.memory.read_u16(test_prep::ABS_ADDR), 0),
         _ => panic!("Unsupported addressing mode for jumping instruction."),
     };
 
@@ -50,7 +50,7 @@ fn jump() {
             JumpType::Jump, // JMP
             (
                 vec![0x4C, 0x6C],
-                vec![AddressingMode::Absolute, AddressingMode::Implied],
+                vec![AddressingMode::Absolute, AddressingMode::Indirect],
             ),
         ),
         (

@@ -12,7 +12,7 @@ fn base_return(opcode: u8, return_mode: &ReturnMode) {
         .write_u16(cpu.get_stack_addr(), expected_program_counter);
     cpu.registers.stack_pointer = cpu.registers.stack_pointer.wrapping_sub(0x01);
 
-    let subtraction = match return_mode {
+    let addition = match return_mode {
         ReturnMode::Interrupt => {
             cpu.php();
             0x0000
@@ -24,7 +24,7 @@ fn base_return(opcode: u8, return_mode: &ReturnMode) {
 
     assert_eq!(
         cpu.registers.program_counter.wrapping_sub(0x0001),
-        expected_program_counter.wrapping_sub(subtraction),
+        expected_program_counter.wrapping_add(addition),
     );
 }
 

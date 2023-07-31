@@ -16,7 +16,7 @@ pub enum ReturnMode {
 impl Cpu {
     /// Base for returning instructions.
     fn return_from(&mut self, return_mode: &ReturnMode) {
-        let subtraction = match return_mode {
+        let addition = match return_mode {
             ReturnMode::Interrupt => {
                 self.plp();
                 0x0000
@@ -29,7 +29,7 @@ impl Cpu {
         self.registers.program_counter = self
             .memory
             .read_u16(self.get_stack_addr())
-            .wrapping_sub(subtraction);
+            .wrapping_add(addition);
         self.registers.stack_pointer = self.registers.stack_pointer.wrapping_add(0x01);
     }
 

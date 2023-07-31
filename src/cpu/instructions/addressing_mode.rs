@@ -1,8 +1,8 @@
 use super::Cpu;
 
 use self::AddressingMode::{
-    Absolute, AbsoluteX, AbsoluteY, Immediate, Implied, IndirectX, IndirectY, ZeroPage, ZeroPageX,
-    ZeroPageY,
+    Absolute, AbsoluteX, AbsoluteY, Immediate, Implied, Indirect, IndirectX, IndirectY, ZeroPage,
+    ZeroPageX, ZeroPageY,
 };
 
 #[derive(Debug)]
@@ -14,6 +14,7 @@ pub enum AddressingMode {
     Absolute,
     AbsoluteX,
     AbsoluteY,
+    Indirect,
     IndirectX,
     IndirectY,
     Implied,
@@ -32,7 +33,7 @@ impl Cpu {
             AbsoluteX => self.absolute(self.registers.index_x),
             AbsoluteY => self.absolute(self.registers.index_y),
 
-            IndirectX | IndirectY => self.indirect(addr_mode),
+            Indirect | IndirectX | IndirectY => self.indirect(addr_mode),
 
             Implied => panic!("mode is implied, address does not need to be looked up"),
         };

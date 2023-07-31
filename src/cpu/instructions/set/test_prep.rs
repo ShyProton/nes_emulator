@@ -47,6 +47,13 @@ fn absolute(cpu: &mut Cpu, mode_register: Option<&RegisterAlias>, opcode: u8, va
     }
 }
 
+fn indirect(cpu: &mut Cpu, opcode: u8, value: u8) {
+    cpu.load_program(&[opcode, 0x34, 0x42]);
+
+    cpu.memory.write(0x4234, ADDR);
+    cpu.memory.write(ADDR.into(), value);
+}
+
 fn indirect_x(cpu: &mut Cpu, opcode: u8, value: u8) {
     cpu.load_program(&[opcode, 0x30]);
     cpu.registers.index_x = 0x04;
@@ -84,6 +91,7 @@ pub fn prepare(cpu: &mut Cpu, opcode: u8, addr_mode: &AddressingMode, value: u8)
         AddressingMode::ZeroPageY => zero(cpu, Some(&RegisterAlias::Y), opcode, value),
         AddressingMode::Absolute => absolute(cpu, None, opcode, value),
         AddressingMode::AbsoluteX => absolute(cpu, Some(&RegisterAlias::X), opcode, value),
+        AddressingMode::Indirect => indirect(cpu, opcode, value),
         AddressingMode::AbsoluteY => absolute(cpu, Some(&RegisterAlias::Y), opcode, value),
         AddressingMode::IndirectX => indirect_x(cpu, opcode, value),
         AddressingMode::IndirectY => indirect_y(cpu, opcode, value),

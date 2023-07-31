@@ -1,7 +1,7 @@
 use super::{
     AddressingMode::{
-        Absolute, AbsoluteX, AbsoluteY, Immediate, Implied, IndirectX, IndirectY, ZeroPage,
-        ZeroPageX, ZeroPageY,
+        Absolute, AbsoluteX, AbsoluteY, Immediate, Implied, Indirect, IndirectX, IndirectY,
+        ZeroPage, ZeroPageX, ZeroPageY,
     },
     Instruction,
     InstructionAlias::{
@@ -113,7 +113,7 @@ pub static INSTRUCTION_LOOKUP: phf::Map<[u8; 1], Instruction> = phf_map! {
     [0xC8] => Instruction::new(INY, 1, 2, Implied),
 
     [0x4C] => Instruction::new(JMP, 3, 3, Absolute),
-    [0x6C] => Instruction::new(JMP, 3, 5, Implied), // Indirect
+    [0x6C] => Instruction::new(JMP, 3, 5, Indirect), // Indirect
 
     [0x20] => Instruction::new(JSR, 3, 6, Absolute),
 

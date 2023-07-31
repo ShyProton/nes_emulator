@@ -15,16 +15,10 @@ pub enum JumpType {
 
 impl Cpu {
     fn jump(&mut self, addr_mode: &AddressingMode, jump_type: &JumpType) {
-        let addr = self.get_operand_address(&AddressingMode::Absolute);
+        let jump_location = self.get_operand_address(addr_mode);
 
-        let jump_location = match addr_mode {
-            AddressingMode::Absolute => addr,
-            AddressingMode::Implied => self.memory.read_u16(addr),
-            _ => panic!("Unsupported addressing mode for jumping instruction."),
-        };
-
+        // Pushes PC - 1 onto stack if the instruction is JSR.
         if matches!(jump_type, JumpType::Subroutine) {
-            // Pushes PC - 1 onto stack.
             self.registers.stack_pointer = self.registers.stack_pointer.wrapping_sub(0x01);
             self.memory.write_u16(
                 self.get_stack_addr(),
