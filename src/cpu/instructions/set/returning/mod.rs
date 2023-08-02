@@ -24,13 +24,7 @@ impl Cpu {
             ReturnMode::Subroutine => 0x0001,
         };
 
-        self.registers.stack_pointer = self.registers.stack_pointer.wrapping_add(0x01);
-
-        self.registers.program_counter = self
-            .memory
-            .read_u16(self.get_stack_addr())
-            .wrapping_add(addition);
-        self.registers.stack_pointer = self.registers.stack_pointer.wrapping_add(0x01);
+        self.registers.program_counter = self.pull_stack_u16().wrapping_add(addition);
     }
 
     /// RTI - Return from Interrupt.
@@ -40,7 +34,7 @@ impl Cpu {
         self.return_from(&ReturnMode::Interrupt);
     }
 
-    /// RTS - Reutnr from Subroutine.
+    /// RTS - Return from Subroutine.
     /// The RTS instruction is used at the end of a subroutine to return to the calling routine.
     /// It pulls the program counter (minus one) from the stack.
     pub fn rts(&mut self) {

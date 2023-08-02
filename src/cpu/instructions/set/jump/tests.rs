@@ -31,9 +31,7 @@ fn base_jump(opcode: u8, addr_mode: &AddressingMode, jump_type: &JumpType) {
     );
 
     // Pulling from the stack.
-    cpu.registers.stack_pointer = cpu.registers.stack_pointer.wrapping_add(0x01);
-    cpu.registers.program_counter = cpu.memory.read_u16(cpu.get_stack_addr());
-    cpu.registers.stack_pointer = cpu.registers.stack_pointer.wrapping_add(0x01);
+    cpu.registers.program_counter = cpu.pull_stack_u16();
 
     assert_eq!(
         cpu.registers.program_counter.wrapping_add(stack_addition),

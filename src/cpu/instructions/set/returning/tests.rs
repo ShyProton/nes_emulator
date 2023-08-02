@@ -8,9 +8,7 @@ fn base_return(opcode: u8, return_mode: &ReturnMode) {
 
     let expected_program_counter = 0x6942;
 
-    cpu.memory
-        .write_u16(cpu.get_stack_addr(), expected_program_counter);
-    cpu.registers.stack_pointer = cpu.registers.stack_pointer.wrapping_sub(0x01);
+    cpu.push_stack_u16(expected_program_counter);
 
     let addition = match return_mode {
         ReturnMode::Interrupt => {

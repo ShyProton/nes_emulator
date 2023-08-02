@@ -11,8 +11,7 @@ fn base_push(opcode: u8, target: &RegisterAlias) {
 
     cpu.run();
 
-    cpu.registers.stack_pointer += 1;
-    assert_eq!(cpu.memory.read(cpu.get_stack_addr()), expected);
+    assert_eq!(cpu.pull_stack(), expected);
 }
 
 fn base_pull(opcode: u8, target: &RegisterAlias) {
@@ -21,9 +20,7 @@ fn base_pull(opcode: u8, target: &RegisterAlias) {
 
     test_prep::prepare(&mut cpu, opcode, &AddressingMode::Implied, 0x00);
 
-    cpu.memory.write(cpu.get_stack_addr(), expected);
-    cpu.registers.stack_pointer -= 1;
-
+    cpu.push_stack(expected);
     cpu.run();
 
     cpu.registers.status.set_flag(StatusFlagAlias::B, false);

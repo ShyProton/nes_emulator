@@ -19,12 +19,7 @@ impl Cpu {
 
         // Pushes PC - 1 onto stack if the instruction is JSR.
         if matches!(jump_type, JumpType::Subroutine) {
-            self.registers.stack_pointer = self.registers.stack_pointer.wrapping_sub(0x01);
-            self.memory.write_u16(
-                self.get_stack_addr(),
-                self.registers.program_counter.wrapping_sub(1),
-            );
-            self.registers.stack_pointer = self.registers.stack_pointer.wrapping_sub(0x01);
+            self.push_stack_u16(self.registers.program_counter.wrapping_sub(1));
         }
 
         self.registers.program_counter = jump_location;

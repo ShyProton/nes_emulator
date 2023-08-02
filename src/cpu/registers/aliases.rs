@@ -1,5 +1,6 @@
 use super::Registers;
 
+#[allow(dead_code)]
 #[derive(Debug, PartialEq, Eq, Hash)]
 pub enum RegisterAlias {
     A, // Accumulator
