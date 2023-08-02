@@ -1,10 +1,6 @@
-use super::{registers::aliases::StatusFlagAlias, Cpu};
+use super::{Cpu, StatusFlagAlias};
 
 impl Cpu {
-    pub fn get_stack_addr(&self) -> u16 {
-        0x0100 + u16::from(self.registers.stack_pointer)
-    }
-
     pub fn update_zero_and_negative_flags(&mut self, result: u8) {
         self.registers
             .status

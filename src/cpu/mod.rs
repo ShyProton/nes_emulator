@@ -5,3 +5,4 @@ use super::Memory;
 mod instructions;
 mod main;
 mod registers;
+mod utils;

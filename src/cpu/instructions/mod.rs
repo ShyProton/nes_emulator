@@ -7,4 +7,3 @@ mod addressing_mode;
 mod main;
 mod reference;
 mod set;
-mod utils;
