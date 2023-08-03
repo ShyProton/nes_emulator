@@ -1,0 +1,27 @@
+name: Deploy to GitHub Pages
+
+on: [push]
+
+jobs:
+  deploy:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Install Trunk
+        run: cargo install trunk
+
+      - name: Build Wasm with Trunk
+        run: trunk build --release
+
+      - name: Deploy to GitHub pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v3
+        with:
+          target_branch: main
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
