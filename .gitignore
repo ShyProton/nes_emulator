@@ -1,7 +1,6 @@
 # Builds
 result
 target
-dist
 
 # Misc
 .direnv
