@@ -5,3 +5,5 @@ edition = "2021"
 
 [dependencies]
 phf = { version = "0.11", features = ["macros"] }
+yew = { version = "0.20.0", features = ["csr"] }
+wasm-bindgen = "=0.2.84"
