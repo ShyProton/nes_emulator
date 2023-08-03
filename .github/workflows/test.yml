@@ -1,4 +1,4 @@
-name: Run checks on code
+name: Check and test code
 
 on: [push, pull_request]
 
@@ -23,9 +23,6 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-
-      - name: Set up Rust
-        uses: actions/setup-rust@v1
 
       - name: Run tests
         run: cargo test --verbose
