@@ -13,22 +13,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Add wasm32-unknown-unknown target
-        run: rustup target add wasm32-unknown-unknown
+      - name: Install Nix
+        uses: cachix/install-nix-action@v19
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install Trunk
-        run: cargo install trunk
-
-      - name: Build with Trunk
-        run: trunk build --release --public-url "nes_emulator"
+      - name: Build project
+        run: nix build
 
       - name: Deploy to gh-pages branch
         run: |
           git config --global user.name "ShyProton"
           git config --global user.email "shayanr1001@gmail.com"
-          git checkout --orphan gh-pages
+          git switch --orphan gh-pages
           git rm -rf .
-          mv dist/* .
+          mv result/* .
           git add .
           git commit -m "Update gh-pages with the latest build"
           git push -f origin gh-pages
