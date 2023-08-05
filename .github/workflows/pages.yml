@@ -26,6 +26,7 @@ jobs:
           git config --global user.name "ShyProton"
           git config --global user.email "shayanr1001@gmail.com"
           git switch --orphan gh-pages
+          git add .
           git rm -rf .
           mv result/* .
           git add .
