@@ -25,6 +25,7 @@ jobs:
         run: |
           git config --global user.name "ShyProton"
           git config --global user.email "shayanr1001@gmail.com"
+          git remote set-url origin "https://ShyProton:${{ secrets.GITHUB_TOKEN }}@github.com/ShyProton/nes_emulator.git"
           git switch --orphan gh-pages
           sudo mv result/* .
           sudo rm -rf result
