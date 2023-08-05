@@ -21,14 +21,20 @@ jobs:
       - name: Build project
         run: nix build
 
-      - name: Deploy to gh-pages branch
+      - name: Configure git credentials
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git remote set-url origin "https://github-actions[bot]:${{ secrets.BOT_TOKEN }}@github.com/ShyProton/nes_emulator.git" 
+          git remote set-url origin "https://github-actions[bot]:${{ secrets.BOT_TOKEN }}@github.com/ShyProton/nes_emulator.git"
+
+      - name: Stage results to gh-pages
+        run: |
           git switch --orphan gh-pages
           sudo mv result/* .
           sudo rm -rf result
           git add .
+          
+      - name: Push to remote gh-pages
+        run: |
           git commit -m "Update gh-pages with the latest build"
           git push -f origin gh-pages
