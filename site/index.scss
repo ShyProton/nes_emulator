@@ -1,6 +1,37 @@
 @import 'colors';
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+
+* {
+    margin: 0;
+    padding: 0;
+}
 
 body {
+    font-family: 'Roboto', sans-serif;
     color: $foreground;
     background-color: $background;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+    color: $background;
+    background-color: $gray-light;
+    height: 30px;
+    padding: 15px;
+    font-size: 1.3em;
+
+    i.social {
+        color: $background;
+        font-size: 1.7em !important;
+        transition: color 0.1s linear;
+
+        &:hover {
+            color: darken($aqua-dark, 20%);
+        }
+    }
 }
