@@ -59,11 +59,11 @@
         root = craneLib.path ./.;
         include = [
           "src"
+          "site"
           "Cargo.lock"
           (nix-filter.lib.matchExt "rs")
           (nix-filter.lib.matchExt "toml")
           (nix-filter.lib.matchExt "html")
-          (nix-filter.lib.matchExt "scss")
         ];
       };
 
