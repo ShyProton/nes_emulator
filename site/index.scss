@@ -8,6 +8,9 @@
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    
     font-family: 'Roboto', sans-serif;
     color: $foreground;
     background-color: $background;
@@ -35,3 +38,29 @@ nav {
         }
     }
 }
+
+.content {
+    display: flex;
+    flex-direction: row;
+
+    .sub-content {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        
+        .tabs {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            align-self: end;
+
+            width: 50%;
+            
+            .tab {
+                height: 25px;
+                width: 100%;
+            }
+        }
+    }
+}
+
