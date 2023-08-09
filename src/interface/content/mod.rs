@@ -9,18 +9,43 @@ pub struct Content {
     tab: Tab,
 }
 
+pub enum Msg {
+    Step,
+    Reset,
+    TabClicked(Tab),
+}
+
+#[derive(PartialEq, Eq, Clone, Copy)]
 pub enum Tab {
     Cpu,
     Memory,
 }
 
-pub enum Msg {
-    Step,
-    TabClicked(Tab),
+#[derive(Properties, PartialEq)]
+struct TabProps {
+    class: String,
+    onclick: Callback<MouseEvent>,
+}
+
+// Utility functions.
+impl Content {
+    fn if_tab_active(&self, tab: Tab) -> &str {
+        if tab == self.tab {
+            "active"
+        } else {
+            ""
+        }
+    }
+
+    fn tab_props(&self, ctx: &Context<Self>, tab: Tab) -> TabProps {
+        TabProps {
+            class: format!("tab {}", self.if_tab_active(tab)),
+            onclick: ctx.link().callback(move |_| Msg::TabClicked(tab)),
+        }
+    }
 }
 
 impl Component for Content {
-    // TODO: Another msg for loading in a program via a textbox for now.
     type Message = Msg;
     type Properties = ();
 
@@ -31,29 +56,41 @@ impl Component for Content {
     }
 
     fn view(&self, ctx: &Context<Self>) -> Html {
+        let cpu_props = self.tab_props(ctx, Tab::Cpu);
+        let memory_props = self.tab_props(ctx, Tab::Memory);
+
         html! {
             <div class="content">
                 <div class="sub-content"></div>
                 <div class="sub-content">
                     <div class="tabs">
-                        <button class="tab" onclick={ctx.link().callback(|_| Msg::TabClicked(Tab::Cpu))}>
-                            {"CPU"}
-                        </button>
-                        <button class="tab" onclick={ctx.link().callback(|_| Msg::TabClicked(Tab::Memory))}>
+                        <button onclick={memory_props.onclick} class={memory_props.class}>
                             {"Memory"}
+                        </button>
+                        <button onclick={cpu_props.onclick} class={cpu_props.class}>
+                            {"CPU"}
                         </button>
                     </div>
                     {match self.tab {
                         Tab::Cpu => html! {
-                            <div>
+                            <div class="stats">
                                 <h1>
                                     {format!("Program Counter: {:#06x}", self.cpu.registers.program_counter)}
                                 </h1>
                             </div>
                         },
-                        Tab::Memory => html! { <h1>{"Memory"}</h1> }
+                        Tab::Memory => html! {
+                            <div class="stats">
+                                <h1>
+                                    {"Memory"}
+                                </h1>
+                            </div>
+                        }
                     }}
-                    <button onclick={ctx.link().callback(|_| Msg::Step)}>{"Step"}</button>
+                    <div class="control">
+                        <button onclick={ctx.link().callback(|_| Msg::Step)}>{"Step"}</button>
+                        <button onclick={ctx.link().callback(|_| Msg::Reset)}>{"Reset"}</button>
+                    </div>
                 </div>
             </div>
         }
@@ -62,6 +99,7 @@ impl Component for Content {
     fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
         match msg {
             Msg::Step => return self.cpu.cycle(),
+            Msg::Reset => self.cpu.load_program(&[0xA9, 0x0A, 0xAA]),
             Msg::TabClicked(tab) => self.tab = tab,
         }
 

@@ -8,7 +8,7 @@ mod memory;
 #[function_component]
 fn App() -> Html {
     html! {
-        <div>
+        <div id="root">
             <Header/>
             <Content/>
         </div>
