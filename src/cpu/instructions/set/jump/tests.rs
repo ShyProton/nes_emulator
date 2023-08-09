@@ -1,5 +1,5 @@
 use super::{test_prep, AddressingMode, Cpu, JumpType};
-use crate::Memory;
+use crate::memory::Memory;
 use std::{collections::HashMap, iter::zip};
 
 fn base_jump(opcode: u8, addr_mode: &AddressingMode, jump_type: &JumpType) {

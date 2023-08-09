@@ -1,6 +1,6 @@
 pub use main::Cpu;
 
-use super::Memory;
+use super::memory::Memory;
 
 mod instructions;
 mod main;
