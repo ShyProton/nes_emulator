@@ -1,5 +1,6 @@
 // TODO: Generalize for CPU and PPU
 // TODO: Make tests for memory.
+#[derive(PartialEq, Eq)]
 pub struct Memory {
     memory: [u8; 0xFFFF],
 }

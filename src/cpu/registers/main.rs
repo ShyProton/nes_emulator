@@ -1,5 +1,6 @@
 use super::{Memory, Status};
 
+#[derive(PartialEq, Eq, Clone, Copy)]
 pub struct Registers {
     pub program_counter: u16,
     pub stack_pointer: u8,

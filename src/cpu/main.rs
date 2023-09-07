@@ -3,6 +3,7 @@ use super::{
     Memory,
 };
 
+#[derive(PartialEq, Eq)]
 pub struct Cpu {
     pub registers: Registers,
     pub memory: Memory,

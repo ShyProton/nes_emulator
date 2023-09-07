@@ -1,5 +1,6 @@
 use super::aliases::StatusFlagAlias;
 
+#[derive(PartialEq, Eq, Clone, Copy)]
 pub struct Status {
     status: [bool; 8],
 }
@@ -14,7 +15,7 @@ impl Status {
         self
     }
 
-    pub const fn get_flag(&self, flag: StatusFlagAlias) -> bool {
+    pub const fn get_flag(self, flag: StatusFlagAlias) -> bool {
         self.status[flag.index()]
     }
 
@@ -24,7 +25,7 @@ impl Status {
         }
     }
 
-    pub fn get_byte(&self) -> u8 {
+    pub fn get_byte(self) -> u8 {
         let mut byte = 0;
 
         for (i, &bit) in self.status.iter().enumerate() {

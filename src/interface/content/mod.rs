@@ -1,5 +1,7 @@
-use crate::cpu::Cpu;
+use crate::cpu::{registers::Registers, Cpu};
 use yew::prelude::*;
+
+use cpu::CpuStats;
 
 mod cpu;
 mod game;
@@ -29,17 +31,9 @@ struct TabProps {
 
 // Utility functions.
 impl Content {
-    fn if_tab_active(&self, tab: Tab) -> &str {
-        if tab == self.tab {
-            "active"
-        } else {
-            ""
-        }
-    }
-
     fn tab_props(&self, ctx: &Context<Self>, tab: Tab) -> TabProps {
         TabProps {
-            class: format!("tab {}", self.if_tab_active(tab)),
+            class: format!("tab {}", if tab == self.tab { "active" } else { "" }),
             onclick: ctx.link().callback(move |_| Msg::TabClicked(tab)),
         }
     }
@@ -72,12 +66,10 @@ impl Component for Content {
                         </button>
                     </div>
                     {match self.tab {
-                        Tab::Cpu => html! {
-                            <div class="stats">
-                                <h1>
-                                    {format!("Program Counter: {:#06x}", self.cpu.registers.program_counter)}
-                                </h1>
-                            </div>
+                        Tab::Cpu => {
+                            html! {
+                                <CpuStats registers={self.cpu.registers}/>
+                            }
                         },
                         Tab::Memory => html! {
                             <div class="stats">
