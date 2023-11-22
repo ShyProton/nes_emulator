@@ -1,0 +1,10 @@
+@use '../../../variables' as *;
+
+.stats {
+    display: flex;
+    flex-direction: column;
+    background-color: $gray-light;
+    padding: 10px;
+    border-radius: 5px 0 0 0;
+    height: 100%;
+}
